@@ -10,7 +10,7 @@ class Scene_preguntas_final extends Phaser.Scene{
         this.load.json('questions', 'data/questions.json');
     }
     create(){
-        
+        loadGameState();
         //Variables
         let center_width = this.sys.game.config.width/2;
         let center_height = this.sys.game.config.height/2;

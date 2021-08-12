@@ -128,7 +128,7 @@ class Scene_preguntas extends Phaser.Scene {
                 else {
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
-                    // saveGameState();
+                    saveGameState();
                     this.scene.start('Scene_preguntas_final');
                 }
             }, 2000);
@@ -160,7 +160,7 @@ class Scene_preguntas extends Phaser.Scene {
                 else {
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
-                    // saveGameState();
+                    saveGameState();
                     this.scene.start('Scene_preguntas_final');
                 }
             }, 2000);
@@ -192,7 +192,7 @@ class Scene_preguntas extends Phaser.Scene {
                 else {
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
-                    // saveGameState();
+                    saveGameState();
                     this.scene.start('Scene_preguntas_final');
                 }
             }, 2000);
