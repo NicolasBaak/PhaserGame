@@ -40,6 +40,13 @@ function loadGameState() {
         gameState = JSON.parse(str);
         // console.log(str)
     }
+
+    let name = localStorage.getItem("nombreJugador");
+    if(name != null){
+        gameState.username = name;
+    }else{
+        gameState.username = "Jugador";
+    }
 }
 
 /**
@@ -67,13 +74,17 @@ class Scene_preguntas extends Phaser.Scene {
     }
 
     create(){
-
-                // carga estado del juego
+        let nombres = document.querySelectorAll('input');
+        nombres.forEach((nombre)=>{
+            nombre.remove();
+        })
+        
+        // carga estado del juego
         loadGameState();
         //let questions = this.cache.json.get('questions');
         //let question = questions[gameState.currentQuestion];
         let question = this.getQuestion(gameState.currentQuestion);
-
+        console.log(question);
          // opción selecionada: undefined 'a', 'b' ó 'c'
         let selectedAnswer = gameState.recordedAnswer[gameState.currentQuestion];
    
@@ -90,6 +101,9 @@ class Scene_preguntas extends Phaser.Scene {
         
         //texto con informacion sobre los dientes
         this.pregunta = this.add.text(100, 40, question.text , { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px'});
+      
+        //Informacion del jugador
+        this.jugador = this.add.text(center_width-100, center_height+300, `Pregunta ${gameState.currentQuestion+1} para ${gameState.username}! ` , { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px', backgroundColor: 'gray'});
         
         const buttonMenu = new Button( this, 150, center_height*2-50, 'button-menu', 'button-menu-hover').setScale(0.5);
         const opcA = new Button( this, center_width+100, center_height-150, 'button-menu', 'button-menu-hover', 'Hola');

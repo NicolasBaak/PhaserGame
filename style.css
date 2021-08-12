@@ -1,10 +1,19 @@
 *{ 
-    margin: 0;
-    padding: 0;
+    width: 1080px;
+    margin: 0 auto;
 }
+
 html, body{
-    height: 100%;
+    height: 95%;
+    background-color: rgb(112, 218, 156);
     font-family: 'Minecraft';
+}
+
+main{
+    padding-top: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 @font-face{
@@ -18,4 +27,14 @@ html, body{
     font-family: 'Minecraft';
     src: url('src/assets/fonts/Minecraft.ttf');
    
+}
+
+
+.input-nombre{
+    position: absolute;
+    opacity: 90%;
+    height: 40px;
+    width: 350px;
+    font-size: 40px;
+    font-family: 'slkscre','Minecraft';
 }

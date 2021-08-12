@@ -5,9 +5,10 @@ class Bootloader extends Phaser.Scene {
     }
 
     preload(){
-        
+        localStorage.clear();
+
         this.load.on("complete", ()=>{
-            this.scene.start("Scene_preguntas");
+            this.scene.start("Menu");
         });
 
         //MENU BOOT
