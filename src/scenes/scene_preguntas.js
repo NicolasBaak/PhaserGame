@@ -1,4 +1,3 @@
-
 import Button from '../gameObjects/button.js';
 
 // Objeto inicializador del juego
@@ -10,63 +9,8 @@ let initialGameState = {
 
 // Variable que contiene el estado del juego
 let gameState = initialGameState;
-
-
-/**
- * función resetGameState
- *  limpia el estado actual del juego y lo inicializa
- */
-function resetGameState() {
-    localStorage.clear();
-    gameState = initialGameState;
-}
-
-/**
- * función saveGameState
- *  guarda el estado actual del juego
- */
-function saveGameState() {
-    localStorage.setItem("gameState", JSON.stringify(gameState));
-}
-
-/**
- * función loadGameState
- *  obtiene el estado del juego y lo carga
- */
-function loadGameState() {
-    let str = localStorage.getItem("gameState");
-
-    if (str != null) {
-        gameState = JSON.parse(str);
-        // console.log(str)
-    }
-
-    let name = localStorage.getItem("nombreJugador");
-    if(name != null){
-        gameState.username = name;
-    }else{
-        gameState.username = "Jugador";
-    }
-}
-
-/**
- * función resize
- *  redimensiona la pantalla
- */
-function resize() {
-    let canvas = game.canvas, width = window.innerWidth, height = window.innerHeight;
-    let wratio = width / height, ratio = canvas.width / canvas.height;
-
-    if (wratio < ratio) {
-        canvas.style.width = width + "px";
-        canvas.style.height = (width / ratio) + "px";
-    } else {
-        canvas.style.width = (height * ratio) + "px";
-        canvas.style.height = height + "px";
-    }
-}
-
-
+            
+            
 class Scene_preguntas extends Phaser.Scene {
 
     constructor(){
@@ -74,18 +18,22 @@ class Scene_preguntas extends Phaser.Scene {
     }
 
     create(){
+
+        gameState = initialGameState;
+        
         let nombres = document.querySelectorAll('input');
         nombres.forEach((nombre)=>{
             nombre.remove();
         })
         
         // carga estado del juego
-        loadGameState();
+        this.loadGameState();
         //let questions = this.cache.json.get('questions');
         //let question = questions[gameState.currentQuestion];
         let question = this.getQuestion(gameState.currentQuestion);
-        console.log(question);
-         // opción selecionada: undefined 'a', 'b' ó 'c'
+        console.log(gameState.currentQuestion);
+        console.log("pregunta:", question);
+        // opción selecionada: undefined 'a', 'b' ó 'c'
         let selectedAnswer = gameState.recordedAnswer[gameState.currentQuestion];
    
         //Variables
@@ -136,13 +84,13 @@ class Scene_preguntas extends Phaser.Scene {
                 if (this.questionExists(nextQuestion)) {
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
-                    saveGameState();
+                    this.saveGameState();
                     this.scene.restart();
                 }
                 else {
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
-                    saveGameState();
+                    this.saveGameState();
                     this.scene.start('Scene_preguntas_final');
                 }
             }, 2000);
@@ -168,13 +116,13 @@ class Scene_preguntas extends Phaser.Scene {
                 if (this.questionExists(nextQuestion)) {
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
-                    saveGameState();
+                    this.saveGameState();
                     this.scene.restart();
                 }
                 else {
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
-                    saveGameState();
+                    this.saveGameState();
                     this.scene.start('Scene_preguntas_final');
                 }
             }, 2000);
@@ -200,13 +148,13 @@ class Scene_preguntas extends Phaser.Scene {
                 if (this.questionExists(nextQuestion)) {
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
-                    saveGameState();
+                    this.saveGameState();
                     this.scene.restart();
                 }
                 else {
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
-                    saveGameState();
+                    this.saveGameState();
                     this.scene.start('Scene_preguntas_final');
                 }
             }, 2000);
@@ -225,7 +173,7 @@ class Scene_preguntas extends Phaser.Scene {
     
         // Desordena el arreglo de preguntas para que no salgan en el mismo orden
         while (questions[0].text == '01 Primera Pregunta' && questions[1].text == '02 Segunda Pregunta' && questions[2].text == '03 Tercera Pregunta') {
-            console.log(questions);
+            // console.log(questions);
             questions = questions.sort(function () {
                 return Math.random() - 0.5;
             });
@@ -244,6 +192,45 @@ class Scene_preguntas extends Phaser.Scene {
             return false;
         }
     }
+
+
+    /**
+     * función resetGameState
+     *  limpia el estado actual del juego y lo inicializa
+     */
+    resetGameState() {
+        localStorage.clear();
+        gameState = initialGameState;
+    }
+
+    /**
+     * función saveGameState
+     *  guarda el estado actual del juego
+     */
+    saveGameState() {
+        localStorage.setItem("gameState", JSON.stringify(gameState));
+    }
+
+    /**
+     * función loadGameState
+     *  obtiene el estado del juego y lo carga
+     */
+    loadGameState() {
+        let str = localStorage.getItem("gameState");
+
+        if (str != null) {
+            gameState = JSON.parse(str);
+            // console.log(str)
+        }
+
+        let name = localStorage.getItem("nombreJugador");
+        if(name != null){
+            gameState.username = name;
+        }else{
+            gameState.username = "Jugador";
+        }
+    }
+
 
 }
 

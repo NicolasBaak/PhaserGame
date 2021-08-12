@@ -5,7 +5,6 @@ class Bootloader extends Phaser.Scene {
     }
 
     preload(){
-        localStorage.clear();
 
         this.load.on("complete", ()=>{
             this.scene.start("Menu");
@@ -20,7 +19,6 @@ class Bootloader extends Phaser.Scene {
         //ROMPECABEZAS BOOT
         this.load.image("titulo-romp" , "./src/assets/images/titulo-rompecabezas.png");
         this.load.image("dientes" , "./src/assets/images/dientes.jpg");
-        this.load.json("questions", './src/data/questions.json');
         //Cargar imagenes del rompecabezas 
         //for(var i = 1;i < 10;i++) {
         //     this.game.load.image(i.toString(), 'assets/images/'+i.toString()+'.png');

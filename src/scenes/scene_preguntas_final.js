@@ -72,24 +72,26 @@ class Scene_preguntas_final extends Phaser.Scene{
     }
 
     const restartButton = new Button( this, center_width-150, center_height*2-50, 'button-menu', 'button-menu-hover').setScale(0.5);
-    const MenuButton = new Button( this, center_width+150, center_height*2-50, 'button-menu', 'button-menu-hover').setScale(0.5);
+    const MenuButton = new Button( this, center_width+350, center_height*2-50, 'button-menu', 'button-menu-hover').setScale(0.5);
       
-    this.add.existing(restartButton);
     restartButton.text.text = 'Nuevo Intento';
+    MenuButton.text.text = 'Menu principal';
+
+    this.add.existing(restartButton);
     restartButton.setInteractive()
     .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
         resetGameState();
-        location.reload();
-        this.scene.start('Scene_preguntas');
+        // location.reload();
+        this.scene.start('InstruccionesQuiz');
+        console.log('Nuevo Intento');
     })
     
     this.add.existing(MenuButton);
-    MenuButton.text.text = 'Menu principal';
     MenuButton.setInteractive()
     .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
         resetGameState();
-        location.reload();
-        this.scene.start('Menu');
+        // location.reload();
+        this.scene.start('Bootloader');
     })
 
     }
@@ -101,7 +103,7 @@ let initialGameState = {
     recordedAnswer: {}
 }
 // Variable que contiene el estado del juego
-let gameState = initialGameState;
+let gameState;
 
 /**
  * función resetGameState

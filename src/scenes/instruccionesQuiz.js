@@ -6,10 +6,12 @@ class InstruccionesQuiz extends Phaser.Scene {
     constructor(){
         super({key: "InstruccionesQuiz"});
     }
-
+    preload(){
+        this.load.json("questions", './src/data/questions.json');
+    }
+    
     create(){
-        console.log('Instrucciones')
-        // console.log(this)
+        localStorage.clear();
         let center_width = this.sys.game.config.width/2;
         let center_height = this.sys.game.config.height/2;
 
@@ -30,7 +32,6 @@ class InstruccionesQuiz extends Phaser.Scene {
         this.add.existing(buttonPreguntas);
         buttonPreguntas.setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
-            console.log(nombre.value);
             localStorage.setItem('nombreJugador', nombre.value);
             this.scene.start('Scene_preguntas');
         })
