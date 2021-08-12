@@ -91,7 +91,7 @@ class Scene_preguntas_final extends Phaser.Scene{
     .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
         resetGameState();
         // location.reload();
-        this.scene.start('Bootloader');
+        this.scene.start('Menu');
     })
 
     }
