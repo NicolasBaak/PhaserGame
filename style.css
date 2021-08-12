@@ -1,0 +1,21 @@
+*{ 
+    margin: 0;
+    padding: 0;
+}
+html, body{
+    height: 100%;
+    font-family: 'Minecraft';
+}
+
+@font-face{
+    font-family: 'slkscre';
+    src: url('src/assets/fonts/slkscre.ttf');
+    font-weight: bold;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Minecraft';
+    src: url('src/assets/fonts/Minecraft.ttf');
+   
+}

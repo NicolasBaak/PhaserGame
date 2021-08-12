@@ -1,0 +1,26 @@
+[
+    {
+      "text": "01 Primera Pregunta",
+      "a": "Opción a",
+      "b": "Opción b",
+      "c": "Opción c",
+      "img": "Image01",
+      "answer": "a"
+    },
+    {
+      "text": "02 Segunda Pregunta",
+      "a": "Opción a",
+      "b": "Opción b",
+      "c": "Opción c",
+      "img": "Image02",
+      "answer": "b"
+    },
+    {
+      "text": "03 Tercera Pregunta",
+      "a": "Opción a",
+      "b": "Opción b",
+      "c": "Opción c",
+      "img": "Image03",
+      "answer": "c"
+    }
+  ]
