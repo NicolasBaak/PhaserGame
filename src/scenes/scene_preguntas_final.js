@@ -72,7 +72,7 @@ class Scene_preguntas_final extends Phaser.Scene{
     }
 
     const restartButton = new Button( this, center_width-150, center_height*2-50, 'button-menu', 'button-menu-hover').setScale(0.5);
-    const MenuButton = new Button( this, center_width+350, center_height*2-50, 'button-menu', 'button-menu-hover').setScale(0.5);
+    const MenuButton = new Button( this, center_width+150, center_height*2-50, 'button-menu', 'button-menu-hover').setScale(0.5);
       
     restartButton.text.text = 'Nuevo Intento';
     MenuButton.text.text = 'Menu principal';
@@ -133,6 +133,7 @@ function loadGameState() {
         gameState = JSON.parse(str);
         // console.log(str)
     }
+    
 }
 
 /**

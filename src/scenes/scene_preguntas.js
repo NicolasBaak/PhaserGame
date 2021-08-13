@@ -25,7 +25,7 @@ class Scene_preguntas extends Phaser.Scene {
         nombres.forEach((nombre)=>{
             nombre.remove();
         })
-        
+   
         // carga estado del juego
         this.loadGameState();
         //let questions = this.cache.json.get('questions');
