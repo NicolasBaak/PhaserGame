@@ -4,6 +4,7 @@ import Scene_preguntas from './scenes/scene_preguntas.js';
 import Scene_preguntas_final from './scenes/scene_preguntas_final.js';
 import Menu from './scenes/menu.js';
 import InstruccionesQuiz from './scenes/instruccionesQuiz.js';
+import Memoria from './scenes/memoria.js';
 
 var config = {
     widht: 720,
@@ -20,7 +21,8 @@ var config = {
         InstruccionesQuiz,
         Scene_play,
         Scene_preguntas,
-        Scene_preguntas_final
+        Scene_preguntas_final,
+        Memoria
     ]
 }
 

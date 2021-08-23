@@ -7,7 +7,7 @@ class Bootloader extends Phaser.Scene {
     preload(){
 
         this.load.on("complete", ()=>{
-            this.scene.start("Menu");
+            this.scene.start("Scene_play");
         });
 
         //MENU BOOT

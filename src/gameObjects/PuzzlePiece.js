@@ -1,8 +1,9 @@
-var PuzzlePiece = function(game, x, y, j, i, width, height, pic, sides) {
+class PuzzlePiece extends Phaser.GameObjects.Sprite{
 
-    this.game = game;
-  
-  
+  constructor(scene, x, y, j, i, width, height, pic, sides){
+
+    super(scene, x, y);
+
     this.left_side = sides.ls;
     this.bottom_side = sides.bs;
     this.right_side = sides.rs;
@@ -24,7 +25,7 @@ var PuzzlePiece = function(game, x, y, j, i, width, height, pic, sides) {
   
    
     //Draw Puzzle Piece 
-    this.piecebmd = this.game.add.bitmapData(bmdwidth,bmdheight);
+    this.piecebmd = scene.add.bitmapData(bmdwidth,bmdheight);
     this.piecebmd.ctx.clearRect(0, 0, bmdwidth, bmdheight);
     this.piecebmd.ctx.strokeStyle = '#FFF';
     this.piecebmd.ctx.fillStyle = '#dcdcdc';
@@ -122,7 +123,7 @@ var PuzzlePiece = function(game, x, y, j, i, width, height, pic, sides) {
       
     this.piecebmd.ctx.fill();
   
-    var src_image = this.game.add.image(Game.w/2, Game.h/2, pic);
+    var src_image = scene.add.image(Game.w/2, Game.h/2, pic);
     src_image.anchor.setTo(0.5);
     src_image.visible = false;
   
@@ -138,18 +139,18 @@ var PuzzlePiece = function(game, x, y, j, i, width, height, pic, sides) {
     if (this.top_side === 1) { padY = 0; }
     if (this.left_side === 1) { padX = 0; }
   
-    var img = this.game.make.bitmapData(w, h);
+    var img = scene.make.bitmapData(w, h);
     area = new Phaser.Rectangle(j*width-(Math.abs(padX- width*0.15)), i*height-(Math.abs(padY - height*0.15)), w, h);
     img.copyRect(pic, area, padX,padY);
     img.update();
     
-    var mask = this.game.make.bitmapData(bmdwidth, bmdheight);
+    var mask = scene.make.bitmapData(bmdwidth, bmdheight);
     mask.copyRect(this.piecebmd, area, bmdwidth, bmdheight);
   
-    var bmd = this.game.make.bitmapData(bmdwidth, bmdheight);
+    var bmd = scene.make.bitmapData(bmdwidth, bmdheight);
     bmd.alphaMask(img, this.piecebmd);
   
-    Phaser.Sprite.call(this, this.game, x-offsetX, y-offsetY, bmd);
+    Phaser.Sprite.call(this, scene, x-offsetX, y-offsetY, bmd);
   
     this.initialX = this.x;
     this.initialY = this.y;
@@ -157,11 +158,10 @@ var PuzzlePiece = function(game, x, y, j, i, width, height, pic, sides) {
     this.inputEnabled = true;
     this.input.enableDrag(true);
   
-    this.game.add.existing(this);
+    scene.add.existing(this);
   
-  };
-  
-  PuzzlePiece.prototype = Object.create(Phaser.Sprite.prototype); 
-  PuzzlePiece.prototype.constructor = PuzzlePiece;
-  
-  
+  }
+
+}
+
+export default PuzzlePiece;
