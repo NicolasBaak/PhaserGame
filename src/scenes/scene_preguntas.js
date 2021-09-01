@@ -37,6 +37,11 @@ class Scene_preguntas extends Phaser.Scene {
         let selectedAnswer = gameState.recordedAnswer[gameState.currentQuestion];
    
         //Variables
+        this.game.sound.stopAll();
+        this.sound.add('M_quiz', {loop:true, volume: 0.3}).play();
+   
+        let clickAnswerAudio = this.sound.add('click-answer', {loop:false}); 
+        let click = this.sound.add('click', {loop:false}); 
         let center_width = this.sys.game.config.width/2;
         let center_height = this.sys.game.config.height/2;
         //Establece rectangulo donde se dibujara la imagen
@@ -62,6 +67,7 @@ class Scene_preguntas extends Phaser.Scene {
         buttonMenu.text.text = 'Regresar';
         buttonMenu.setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
+            click.play();
             this.scene.start('Menu');
         })
         
@@ -69,6 +75,7 @@ class Scene_preguntas extends Phaser.Scene {
         opcA.text.text = question.a;
         opcA.setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
+            clickAnswerAudio.play();
             selectedAnswer = 'a';
             if (selectedAnswer == question.answer) {
                 this.pregunta.setText('Correcto! 😄');
@@ -101,6 +108,7 @@ class Scene_preguntas extends Phaser.Scene {
         opcB.text.text = question.b;
         opcB.setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
+            clickAnswerAudio.play();
             selectedAnswer = 'b';
             if (selectedAnswer == question.answer) {
                 this.pregunta.setText('Correcto! 😄');
@@ -133,6 +141,7 @@ class Scene_preguntas extends Phaser.Scene {
         opcC.text.text = question.c;
         opcC.setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
+            clickAnswerAudio.play();
             selectedAnswer = 'c';
             if (selectedAnswer == question.answer) {
                 this.pregunta.setText('Correcto! 😄');

@@ -12,6 +12,12 @@ class InstruccionesQuiz extends Phaser.Scene {
     
     create(){
         localStorage.clear();
+   
+        this.game.sound.stopAll();
+        this.sound.add('M_name', {loop:true, volume: 0.3}).play();
+   
+        let clickAnswerAudio = this.sound.add('click-answer', {loop:false}); 
+   
         let center_width = this.sys.game.config.width/2;
         let center_height = this.sys.game.config.height/2;
 
@@ -19,7 +25,7 @@ class InstruccionesQuiz extends Phaser.Scene {
         this.titulo = this.add.text(center_width-300, 140,  'Bienvenido a Quiz Dental 🎉' , { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '48px'});
       
         //texto con informacion sobre los dientes
-        this.titulo_nombre = this.add.text(center_width-200, 240,  'Ingresa tu apodo o nombre:' , { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px'});
+        this.titulo_nombre = this.add.text(center_width-200, 250,  '¿Cual es tu nombre?:' , { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px'});
 
         //Se crea el input de tipo text para inresar el nombre del jugador
         const nombre = document.createElement('input');
@@ -32,6 +38,7 @@ class InstruccionesQuiz extends Phaser.Scene {
         this.add.existing(buttonPreguntas);
         buttonPreguntas.setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
+            clickAnswerAudio.play();
             localStorage.setItem('nombreJugador', nombre.value);
             this.scene.start('Scene_preguntas');
         })

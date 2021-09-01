@@ -14,6 +14,13 @@ class Scene_preguntas_final extends Phaser.Scene{
         
         let username = localStorage.getItem('nombreJugador');
         //Variables
+        this.game.sound.stopAll();
+        let M_win = this.sound.add('M_win', {loop:true, volume: 0.3});
+        let M_mid = this.sound.add('M_mid', {loop:true, volume: 0.3});
+        let M_lose = this.sound.add('M_lose', {loop:true, volume: 0.3});
+        let rightAudio = this.sound.add('clickRight', {loop:false});
+      
+   
         let center_width = this.sys.game.config.width/2;
         let center_height = this.sys.game.config.height/2;
 
@@ -58,15 +65,19 @@ class Scene_preguntas_final extends Phaser.Scene{
 
     // textos que se muestran de acuerdo al porcentaje obtenido
     if (Math.floor(score) <= 30) {
+        M_lose.play();
         let scoreText = this.add.text(center_width, 300, 'No te preocupes por el resultado ' + username + ',\n recuerda que la práctica hace al maestro!! 🦾', { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px'});
         scoreText.setOrigin(0.5, -2.5);
     } else if (Math.floor(score) <= 66) {
+        M_mid.play();
         let scoreText = this.add.text(center_width, 300, 'Lo hiciste bien ' + username + '!, pero recuerda \nque siempre puedes mejorar 😎', { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px'});
         scoreText.setOrigin(0.5, -2.5);
     } else if (Math.floor(score) <= 80) {
+        rightAudio.play();
         let scoreText = this.add.text(center_width, 300, 'Muy bien ' + username + '!!\n Tu resultado refleja que tienes buenos conocimientos 😋', { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px'});
         scoreText.setOrigin(0.5, -2.5);
     } else {
+        M_win.play();
         let scoreText = this.add.text(center_width, 300, 'Excelente ' + username+ ', muchas felicidades!!! 🥇\n, el esfuerzo de tu estudio se nota', { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px'});
         scoreText.setOrigin(0.5, -2.5);
     }
