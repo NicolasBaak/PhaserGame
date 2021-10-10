@@ -1,26 +1,122 @@
-[
+  [
     {
-      "text": "01 Primera Pregunta",
-      "a": "Opción a",
-      "b": "Opción b",
-      "c": "Opción c",
+      "text": "01 ¿Desde cuando deben los niños empezar a visitar al dentista?",
+      "a": "Después de que todos sus dientes de leche han salido",
+      "b": "Al salir los primeros 3 dientes",
+      "c": "Cuando tengan un año de edad o tengan su primer diente",
       "img": "Image01",
-      "answer": "a"
+      "answer": "c"
     },
     {
-      "text": "02 Segunda Pregunta",
-      "a": "Opción a",
-      "b": "Opción b",
-      "c": "Opción c",
+      "text": "02 ¿Cuántos dientes tiene un niño?",
+      "a": "12",
+      "b": "20",
+      "c": "22",
       "img": "Image02",
       "answer": "b"
     },
     {
-      "text": "03 Tercera Pregunta",
-      "a": "Opción a",
-      "b": "Opción b",
-      "c": "Opción c",
+      "text": "03 ¿Cuántos dientes permanentes tendrá un niño cuando sea adulto?",
+      "a": "28",
+      "b": "30",
+      "c": "32",
       "img": "Image03",
       "answer": "c"
+    },
+    {
+      "text": "04 ¿Cuáles son las caries dentales?",
+      "a": "Una infección viral de la boca",
+      "b": "Una enfermedad infecciosa causada por la descomposición bacteriana que daña la estructura del diente",
+      "c": "Son agujeros que ocurren naturalmente en el diente",
+      "img": "Image04",
+      "answer": "b"
+    },
+    {
+      "text": "05 ¿Qué es la gingivitis?",
+      "a": "Inflamación de las encías",
+      "b": "La inflamación de la lengua",
+      "c": "La impactación de un diente",
+      "img": "Image05",
+      "answer": "a"
+    },
+    {
+      "text": "06 ¿Qué es un sellador dental?",
+      "a": "Un empaste dental utilizado para tratar las caries",
+      "b": "Una pasta de dientes prescripción especial",
+      "c": "Una cubierta protectora para los molares primero y segundo",
+      "img": "Image06",
+      "answer": "c"
+    },
+    {
+      "text": "07 ¿Cuál es otro nombre para los terceros molares?",
+      "a": "La tercera erupción",
+      "b": "Los dientes supernumerarios",
+      "c": "Las muelas del juicio",
+      "img": "Image07",
+      "answer": "c"
+    },
+    {
+      "text": "08 ¿Con qué frecuencia te cepillas los dientes?",
+      "a": "Menos de una vez al día",
+      "b": "Tres veces al día",
+      "c": "Una o dos veces al día",
+      "img": "Image08",
+      "answer": "b"
+    },
+    {
+      "text": "09 ¿Cúanto tiempo crees que deba durar cepillar tus dientes?",
+      "a": "Entre 2 y 3 minutos",
+      "b": "Entre 1 y 2 minutos",
+      "c": "Menos de un minuto",
+      "img": "Image09",
+      "answer": "a"
+    },
+    {
+      "text": "10 ¿Cómo se deben cepillar los dientes?",
+      "a": "Con mucha fuerza",
+      "b": "Con movimientos horizontales, de derecha a izquierda",
+      "c": "Con movimiento verticales o circulares, de arriba abajo",
+      "img": "Image10",
+      "answer": "c"
+    },
+    {
+      "text": "11 ¿Cada cuánto tiempo se debe cambiar el cepillo de dientes?",
+      "a": "Cada 6 meses",
+      "b": "Cada 3 meses",
+      "c": "Cada mes",
+      "img": "Image11",
+      "answer": "b"
+    },
+    {
+      "text": "12 ¿Es recomendable usar enjuague bucal?",
+      "a": "Si se puede sí, es recomendable",
+      "b": "No, no ayuda mucho",
+      "c": "De vez en cuando",
+      "img": "Image12",
+      "answer": "a"
+    },
+    {
+      "text": "13 ¿Es recomendable usar hilo dental?",
+      "a": "De vez en cuando",
+      "b": "No, no ayuda mucho",
+      "c": "Si se puede sí, es recomendable",
+      "img": "Image13",
+      "answer": "c"
+    },
+    {
+      "text": "14 ¿Cada cuánto tiempo se debe ir al dentista?",
+      "a": "Sólo cuando me duele algo",
+      "b": "Una o más veces al año, aunque no tenga dolores",
+      "c": "Una vez cada dos años",
+      "img": "Image14",
+      "answer": "b"
+    },
+    {
+      "text": "15 ¿Cuánta pasta de dientes se debe poner en el cepillo?",
+      "a": "Que ocupe todo el cepillo de dientes",
+      "b": "Que sea del tamaño de un chícharo",
+      "c": "Se debe poner 1 gramo nada más",
+      "img": "Image15",
+      "answer": "b"
     }
   ]

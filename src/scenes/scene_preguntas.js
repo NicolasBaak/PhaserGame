@@ -44,24 +44,22 @@ class Scene_preguntas extends Phaser.Scene {
         let click = this.sound.add('click', {loop:false}); 
         let center_width = this.sys.game.config.width/2;
         let center_height = this.sys.game.config.height/2;
-        //Establece rectangulo donde se dibujara la imagen
-        
-        this.add.rectangle(0,0, 400, 400, 0xb2e998).setAngle(45);
-
-        this.add.rectangle(320, 70, 550, 100, 0x4835dc);
-
-        this.add.rectangle(center_width*2, center_height*2, 400, 400, 0xb2e998).setAngle(45);
-        
+    
+        this.background = this.add.image(center_width, center_height , 'bg-quizz');
+        let style = { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '24px'}
+    
         //texto con informacion sobre los dientes
-        this.pregunta = this.add.text(100, 40, question.text , { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px'});
-      
-        //Informacion del jugador
-        this.jugador = this.add.text(center_width-100, center_height+300, `Pregunta ${gameState.currentQuestion+1} para ${gameState.username}! ` , { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px', backgroundColor: 'gray'});
+        //this.pregunta = this.add.text(center_width-300, center_height-200, question.text , style);
+        this.pregunta = this.add.bitmapText(center_width-250, center_height-180, 'minecraft',question.text).setMaxWidth(250)
         
-        const buttonMenu = new Button( this, 150, center_height*2-50, 'button-menu', 'button-menu-hover').setScale(0.5);
-        const opcA = new Button( this, center_width+100, center_height-150, 'button-menu', 'button-menu-hover', 'Hola');
-        const opcB = new Button( this, center_width+100, center_height, 'button-menu', 'button-menu-hover');
-        const opcC = new Button( this, center_width+100, center_height+150, 'button-menu', 'button-menu-hover');
+        //Informacion del jugador
+        this.jugador = this.add.bitmapText(center_width-240, center_height,'minecraft',  `Pregunta ${gameState.currentQuestion+1} para ${gameState.username}! `).setMaxWidth(280).setFontSize(24);
+        
+        const buttonMenu = new Button( this, center_width-100, center_height+110, 'button-menu', 'button-menu-hover').setScale(0.6);
+
+        const opcA = new Button( this, center_width+150, center_height-120, 'button-menu', 'button-menu-hover').setScale(1.2);
+        const opcB = new Button( this, center_width+150, center_height, 'button-menu', 'button-menu-hover').setScale(1.2);
+        const opcC = new Button( this, center_width+150, center_height+120, 'button-menu', 'button-menu-hover').setScale(1.2);
 
         this.add.existing(buttonMenu);
         buttonMenu.text.text = 'Regresar';
@@ -73,6 +71,8 @@ class Scene_preguntas extends Phaser.Scene {
         
         this.add.existing(opcA);
         opcA.text.text = question.a;
+        opcA.text.setFontSize(20);
+        opcA.text.setMaxWidth(opcC.upImage.width*1.3)
         opcA.setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
             clickAnswerAudio.play();
@@ -106,6 +106,8 @@ class Scene_preguntas extends Phaser.Scene {
 
         this.add.existing(opcB);
         opcB.text.text = question.b;
+        opcB.text.setFontSize(20);
+        opcB.text.setMaxWidth(opcC.upImage.width*1.3)
         opcB.setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
             clickAnswerAudio.play();
@@ -139,6 +141,8 @@ class Scene_preguntas extends Phaser.Scene {
 
         this.add.existing(opcC);
         opcC.text.text = question.c;
+        opcC.text.setFontSize(20);
+        opcC.text.setMaxWidth(opcC.upImage.width*1.3)
         opcC.setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
             clickAnswerAudio.play();

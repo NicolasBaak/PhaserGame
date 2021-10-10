@@ -25,6 +25,10 @@ class Bootloader extends Phaser.Scene {
         this.load.audio('clickRight', './src/assets/audio/right.ogg');
         //MENU BOOT
         this.load.image("button-menu" , "./src/assets/images/ButtonMenu.png");
+        this.load.image("bg-menu" , "./src/assets/images/bg_menu.jpeg");
+        this.load.image("bg-quizz" , "./src/assets/images/bg_quizz.jpeg");
+        this.load.image("bg-nombre" , "./src/assets/images/bg_nombre.jpeg");
+        this.load.image("bg-rompecabezas" , "./src/assets/images/bg_rompecabezas.jpeg");
         this.load.image("button-menu-hover" , "./src/assets/images/ButtonMenuHover.png");
     
 
@@ -32,10 +36,18 @@ class Bootloader extends Phaser.Scene {
         //ROMPECABEZAS BOOT
         this.load.image("titulo-romp" , "./src/assets/images/titulo-rompecabezas.png");
         this.load.image("dientes" , "./src/assets/images/dientes.jpg");
+
+        this.load.spritesheet("pintu", "./src/assets/images/pintu.png", { frameWidth: 184, frameHeight: 184 });
+        this.load.image("jindu", "./src/assets/images/jindu.png");
+        this.load.image("jinduBg", "./src/assets/images/jinduBg.png");
         //Cargar imagenes del rompecabezas 
         //for(var i = 1;i < 10;i++) {
         //     this.game.load.image(i.toString(), 'assets/images/'+i.toString()+'.png');
         // }
+        this.load.bitmapFont('minecraft', './src/assets/fonts/minecraft.png', './src/assets/fonts/minecraft.xml');
+        //Memorama
+        this.load.spritesheet('card', './src/assets/images/card5.png', {frameWidth: 700 / 4, frameHeight:  787 / 3});
+     
     }
 }
 

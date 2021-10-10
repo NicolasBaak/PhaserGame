@@ -7,7 +7,7 @@ import InstruccionesQuiz from './scenes/instruccionesQuiz.js';
 import Memoria from './scenes/memoria.js';
 
 var config = {
-    widht: 720,
+    widht: 1024,
     height: 720,
     parent: 'container',
     dom: {

@@ -3,18 +3,16 @@ class Button extends Phaser.GameObjects.Container {
     constructor(scene, x, y, upImage, overImage){
         super(scene, x, y);
 
-        this.upImage = scene.add.image( 0, 0, upImage);
-        this.overImage = scene.add.image( 0, 0, overImage);
-        this.text = scene.add.text(0, 0, 'Button', { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '32px'})
+        this.upImage = scene.add.image( 0, 0, upImage).setScale(1.5, 1);
+        this.overImage = scene.add.image( 0, 0, overImage).setScale(1.5, 1);
+        this.text = scene.add.bitmapText(0, 0, 'minecraft','', 32, 1).setMaxWidth(this.upImage.width)
         .setOrigin(0.5, 0.5)
 
-        this.upImage.setScale(0.8)
-        this.overImage.setScale(0.8)
+        this.overImage
 
         this.add(this.upImage)
         this.add(this.overImage)
         this.add(this.text)
-
        
         this.overImage.setVisible(false)
 

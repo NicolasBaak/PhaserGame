@@ -16,6 +16,9 @@ main{
     justify-content: center;
 }
 
+input{
+    margin-top: 30px;
+}
 @font-face{
     font-family: 'slkscre';
     src: url('src/assets/fonts/slkscre.ttf');
