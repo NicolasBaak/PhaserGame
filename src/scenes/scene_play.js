@@ -1,15 +1,5 @@
 
 import Button from '../gameObjects/button.js'
-import Puzzle from '../gameObjects/Puzzle.js';
-var time = 50;
-var jinduWord;
-
-var jindu;
-var sort = randomArr()
-var temPosition = {};
-var pintuGroup
-var allowDragStart = true;
-var allowDragStop = false;
 
 function randomArr() {
     var initArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
@@ -19,172 +9,167 @@ function randomArr() {
     }
     return temArr;
 }
+
 class Scene_play extends Phaser.Scene {
 
     constructor() {
         super({ key: "Scene_play" });
     }
 
-    preload() {
-        this.load.spritesheet("pintu", "./src/assets/images/pintu.png", { frameWidth: 184, frameHeight: 184 });
-        this.load.image("jindu", "./src/assets/images/jindu.png");
-        this.load.image("jinduBg", "./src/assets/images/jinduBg.png");
+    init(){
+        this.jindu;
+        this.sort = randomArr()
+        this.temPosition = {};
+        this.pintuGroup
+        //Variables del tiempo
+        this.time = 50;
+        this.timeElapsed = 0;
+        this.maxTime = 1;
+        this.tamaSprite = 184;
     }
 
     create() {
-        var style = { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '24px' };
-        this.game.sound.stopAll();
-        this.sound.add('M_puzzle', {loop:true, volume: 0.3}).play();
-   
-        //Variables
         let center_width = this.sys.game.config.width/2;
         let center_height = this.sys.game.config.height/2;
-        //Establece rectangulo donde se dibujara la imagen
-        this.add.rectangle(center_width+200, center_height+100, 800, 700, 0xd689b3);
+        var style = { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '24px' };
+        this.game.sound.stopAll();
 
-        // Titulo del juego
-        this.titulo = this.add.image(230, 60, "titulo-romp");
-        this.titulo.setScale(0.5);
-        this.titulo.setAngle(-5);
+        //this.sound.add('M_puzzle', {loop:true, volume: 0.3}).play();
+        //this.background = this.add.image(center_width, center_height , 'bg-rompecabezas');
 
-        //texto con informacion sobre los dientes
-        this.add.text(50, center_height, 'Un tercio de tus \ndientes está por \ndebajo de la encía.',style);
+        //Texto con informacion sobre los dientes
+        //this.add.text(center_width-250, center_height-50, 'Un tercio de tus \ndientes está por \ndebajo de la encía.', style);
 
-        //this.add.image(center_width, center_height+70, 'dientes').setTint(0x9FC5E8);
-
-        const buttonMenu = new Button( this, 120, center_height*2-40, 'button-menu', 'button-menu-hover').setScale(0.45);
+/*
+        const buttonMenu = new Button( this, center_width-100, center_height+120, 'button-menu', 'button-menu-hover').setScale(0.6);
         buttonMenu.text.text = 'Regresar';
         this.add.existing(buttonMenu);
-
         buttonMenu.setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
-            this.scene.start('Menu');
-         })
-
+           this.scene.start('Menu');
+        })
+*/
         ///=========Puzzle====
-        var container = this.add.container(530, 145);
-        var jinduBg = this.add.sprite(center_width+250, 70, 'jinduBg')
-        jindu = this.add.sprite(center_width+250, 70, 'jindu')
 
-        // jinduBg.addChild(jindu)
+        /*
+        this.container = this.add.container(530, 145);
+        this.jinduBg = this.add.sprite(center_width+150, 220, 'jinduBg').setScale(0.7)
+        this.jindu = this.add.sprite(center_width+150, 220, 'jindu').setScale(0.8)
 
-        jindu.scaleX = 1.4;
+        //Tiempo
+        this.timeText = this.add.bitmapText(center_width+50, 180, 'minecraft',`Tiempo: ${this.time} seg.`).setFontSize(28);
         var tween = this.tweens.add({
-            targets: jindu,
+            targets: this.jindu,
             props: {
-                scaleX: { value: 0, duration: 15 * 1000, ease: 'None', repeat: 0 }
+                scaleX: { value: 0, duration: this.time * 1000, ease: 'None', repeat: 0 }
             }
         });
-
-        this.leftTime = time
-      
-        jinduWord = this.add.text(center_width+180, 20, "Tiempo: " + this.leftTime + " s", style);
-
-        pintuGroup = this.add.group();
-        // Phaser.Actions.SetXY(pintuGroup.getChildren(), 48, 500, 64, 0);
-
-        var item;
-        for (var i in sort) {
-            item = pintuGroup.create(center_width-10 + 184 * (Math.floor(i % 3)), center_height+60-184 + 184 * (Math.floor(i / 3)), 'pintu', sort[i]);
-            item.sort = sort[i];
+        */
+        this.pintuGroup = this.add.group();
+        let item;
+        let posX = 540   //560
+        let posY = 150   //285  posiciones para ajustarse al background
+        for (var i in this.sort) {
+            item = this.pintuGroup.create(posX +  this.tamaSprite * (Math.floor(i % 3)),   posY + this.tamaSprite * (Math.floor(i / 3)), 'pintu', this.sort[i]);
+            item.sort = this.sort[i];
             item.nowSort = +i;
+            console.log("principio", item.sort, item.nowSort)
             item.setInteractive();
             this.input.setDraggable(item);
             this.input.dragDistanceThreshold = 16;
+            this.input.topOnly = false;
 
             this.input.on('dragstart', function (pointer, gameObject) {
                 gameObject.setDepth(1);
-                // if (allowDragStart) {
-                //     allowDragStart = false;
-                //     allowDragStop = true;
-               
-                //     temPosition.x = gameObject.x;
-                //     temPosition.y = gameObject.y;
-                // } else {
-                //     //gameObject.input.disableDrag();
-                //     gameObject.input.draggable = false;
-                // }
                 gameObject.setTint(0xCCCCCC);
+                this.temPosition.x = gameObject.x;
+                this.temPosition.y = gameObject.y;
+                console.log("partimos de: ", gameObject.x, gameObject.y)
             }, this);
 
              this.input.on('drag', function (pointer, gameObject, dragX, dragY) {
-                 gameObject.x = dragX;
-                 gameObject.y = dragY;
-             });
+                 gameObject.x = Phaser.Math.Snap.To(dragX - posX, this.tamaSprite) + posX;
+                 gameObject.y = Phaser.Math.Snap.To(dragY - posY, this.tamaSprite) + posY; 
+             }, this);
 
             this.input.on('dragend', function (pointer, gameObject) {
                 gameObject.setDepth(0);
                 gameObject.clearTint();
-                // var t = this;
-                // if (allowDragStop) {
-                //     allowDragStop = false;
+                var temX = (gameObject.x - posX)/(this.tamaSprite);
+                var temY = (gameObject.y - posY)/(this.tamaSprite);
+                if(temX<0 || temX>2 || temY<0 || temY>2){
+                    console.log("Se salio :>")
+                    this.tweens.add({
+                        targets: gameObject,
+                        props: {
+                            x: { value: this.temPosition.x, duration: 300, ease: 'Quartic.Out', repeat: 0 }, 
+                            y: { value: this.temPosition.y, duration: 300, ease: 'Quartic.Out', repeat: 0 }, 
+                        }
+                    });
+                    return;
+                }
+                var newSort = (gameObject.x-posX)/this.tamaSprite + (gameObject.y-posY)/this.tamaSprite*3;
+                var ifMoveEnd = true;
+                this.pintuGroup.getChildren().forEach(function(item){
+                    if(item.nowSort === newSort && ifMoveEnd === true){
+                        ifMoveEnd = false;
+                        item.setDepth(1);
+                        var temtween = this.tweens.add({
+                            targets: item,
+                            onComplete: ()=>{
+                                item.nowSort = gameObject.nowSort
+                                gameObject.nowSort = newSort;
+                                ifMoveEnd = true;
+                                console.log("movemos item:", item.sort, item.nowSort)
+                                item.setDepth(0);
+                                //this.checkSort();
+                            },
+                            props: {
+                                x: { value: this.temPosition.x, duration: 300, ease: 'Quartic.Out', repeat: 0 }, 
+                                y: { value: this.temPosition.y, duration: 300, ease: 'Quartic.Out', repeat: 0 }, 
+                            }
+                        });
+                       
+                        
+                        
+                    }
+                }, this);
 
-                //     if (temPosition.x === gameObject.x && temPosition.y === gameObject.y) {
-                //         allowDragStart = true;
-                //         allowDragStop = false;
-                //         //pintuGroup.setAll('input.draggable', true)
-                //         pintuGroup.input.draggable = true;
-                //     } else {
-                //         // 精灵移动到边界外返回原位置
-                //         var temX = (gameObject.x - 25) / 184;
-                //         var temY = (gameObject.y - 70) / 184;
-                //         if (temX < 0 || temX > 2 || temY < 0 || temY > 2) {
-                //             var temTween = this.tweens.timeline({
-                //                 targets: gameObject,
-                //                 props: {
-                //                     x: { value: temPosition.x, duration: 300, ease: 'None', repeat: 0 },
-                //                     y: { value: temPosition.y, duration: 300, ease: 'None', repeat: 0 }
-                //                 },
-                //                 onComplete: function(){
-                //                     allowDragStart = true;
-                //                     allowDragStop = false;
-                //                     //pintuGroup.setAll('input.draggable', true)
-                                    
-                //                 }
-                //             });
-                //             return;
-                //         }
-                //         // 精灵移动到的位置排序
-                //         var newSort = (gameObject.x - 25) / 184 + (gameObject.y - 70) / 184 * 3;
-
-                //         // 循环group，使原拼图与新拼图替换位置
-                //         var ifMoveEnd = true;
-                //         pintuGroup.foreach(function (item) {
-                //             if (item.nowSort === newSort && ifMoveEnd === true) {
-                //                 ifMoveEnd = false;
-                //                 //item.bringToTop()
-                //                 item.setDepth(1);
-
-                //                 // var tween = game.add.tween(item).to({ x: temPosition.x, y: temPosition.y }, 300, Phaser.Easing.Quartic.Out, true);
-
-                //                 var tween = this.tweens.timeline({
-                //                     targets: item,
-                //                     props: {
-                //                         x: { value: temPosition.x, duration: 300, ease: 'None', repeat: 0 },
-                //                         y: { value: temPosition.y, duration: 300, ease: 'None', repeat: 0 }
-                //                     },
-                //                     onComplete: function(){
-                //                         item.nowSort = sprite.nowSort
-                //                         sprite.nowSort = newSort;
-                //                         ifMoveEnd = true;
-                //                         allowDragStart = true;
-                //                         allowDragStop = false;
-                //                        // pintuGroup.setAll('input.draggable', true)
-                //                         if (t.checkSort()) {
-                //                             window.alert("成功！");
-                //                             this.paused = true;
-                //                         }
-                //                     }
-                //                 });
-                //             }
-                //         })
-                //     }
-                // }
+                this.checkSort();
             }, this);
+            
         }
+
+        /*
+        this.pintuGroup.children.iterate((child) => {
+        child.setScale(0.5);
+        console.log("Mas peque")
+        });
+        */
     }
 
-    update() {
+    checkSort(){
+        var ifFinash = true;
+        console.log("Revizando ando...")
+        this.pintuGroup.getChildren().forEach(function(item) {
+            if(item.sort !== item.nowSort){
+                ifFinash = false;
+            }
+          }, this);
+        return ifFinash;
+    }
+
+    update(time, delta) {
+        /*
+        let deltaInSecond = delta/1000; // convert it to second
+        this.timeElapsed = this.timeElapsed + deltaInSecond;
+         if(this.timeElapsed >= this.maxTime) // if the time elapsed already more than 1 second, update the energy variable
+        {
+            this.time--;
+            this.timeText.setText("Tiempo: " + this.time.toString()+ " seg.");
+            this.timeElapsed = 0; // don't forget to reset it to zero again.
+            }
+            */
     }
 
 }
