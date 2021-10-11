@@ -121,6 +121,7 @@ let gameState;
  *  limpia el estado actual del juego y lo inicializa
  */
 function resetGameState() {
+    localStorage.removeItem(gameState);
     localStorage.clear();
     gameState = initialGameState;
 }

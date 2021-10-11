@@ -1,5 +1,6 @@
 import Bootloader from './bootloader.js'
 import Scene_play from './scenes/scene_play.js';
+import Scene_play_final from './scenes/scene_play_final.js';
 import Scene_preguntas from './scenes/scene_preguntas.js';
 import Scene_preguntas_final from './scenes/scene_preguntas_final.js';
 import Menu from './scenes/menu.js';
@@ -20,6 +21,7 @@ var config = {
         Menu,
         InstruccionesQuiz,
         Scene_play,
+        Scene_play_final,
         Scene_preguntas,
         Scene_preguntas_final,
         Memoria

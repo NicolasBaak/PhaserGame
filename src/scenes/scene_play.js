@@ -1,6 +1,9 @@
 
 import Button from '../gameObjects/button.js'
 
+// Variable que contiene el estado del juego
+let gameState = {time: 1, win: false}
+
 function randomArr() {
     var initArr = [0, 1, 2, 3, 4, 5, 6, 7, 8];
     var temArr = []
@@ -14,16 +17,15 @@ class Scene_play extends Phaser.Scene {
 
     constructor() {
         super({ key: "Scene_play" });
-        this.temPosition = {};
     }
-
+    
     init(){
+        this.temPosition = {};
         this.jindu;
-        this.sort = randomArr()
-        
+        this.sort = randomArr()  
         this.pintuGroup
         //Variables del tiempo
-        this.time = 50;
+        this.time = 20;
         this.timeElapsed = 0;
         this.maxTime = 1;
         this.tamaSprite = 184/2;
@@ -32,9 +34,10 @@ class Scene_play extends Phaser.Scene {
     }
 
     create() {
+        this.resetGameState();
         let center_width = this.sys.game.config.width/2;
         let center_height = this.sys.game.config.height/2;
-        var style = { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '24px' };
+        
         this.game.sound.stopAll();
 
         //this.sound.add('M_puzzle', {loop:true, volume: 0.3}).play();
@@ -87,7 +90,6 @@ class Scene_play extends Phaser.Scene {
                 
                 this.scene.temPosition.x = this.x;
                 this.scene.temPosition.y = this.y;
-                //console.log("start: ", this.scene.temPosition.x );
             });
 
              item.on('drag', function (pointer, dragX, dragY) {
@@ -121,13 +123,15 @@ class Scene_play extends Phaser.Scene {
                         this.scene.tweens.add({
                             targets: item,
                             onComplete: function(){
-                                //console.log(this, this.parent, t.nowSort)
                                 item.setDepth(0);
                                 
                                 item.nowSort = t.nowSort
                                 t.nowSort = newSort;
                                 if(this.parent.scene.checkSort()){
-                                    console.log("GANASTEEE!!!")
+                                    gameState.time = t.scene.time;
+                                    gameState.win = true;
+                                    this.parent.scene.saveGameState();
+                                    
                                 }
                             },
                             props: {
@@ -145,7 +149,6 @@ class Scene_play extends Phaser.Scene {
         
         this.pintuGroup.children.iterate((child) => {
         child.setScale(0.5);
-        console.log("Mas peque")
         });
         
     }
@@ -159,8 +162,24 @@ class Scene_play extends Phaser.Scene {
           }, this);
         return ifFinash;
     }
+    /**
+     * función resetGameState
+     *  limpia el estado actual del juego y lo inicializa
+     */
+     resetGameState() {
+        window.localStorage.clear();
+        gameState = {time: true, win: false};
+    }
+    /**
+     * función saveGameState
+     *  guarda el estado actual del juego
+     */
+     saveGameState() {
+        window.localStorage.setItem("gameState", JSON.stringify(gameState));
+    }
 
     update(time, delta) {
+
         let deltaInSecond = delta/1000; 
         this.timeElapsed = this.timeElapsed + deltaInSecond;
          if(this.timeElapsed >= this.maxTime)
@@ -168,6 +187,10 @@ class Scene_play extends Phaser.Scene {
             this.time--;
             this.timeText.setText("Tiempo: " + this.time.toString()+ " seg.");
             this.timeElapsed = 0; 
+            if(gameState.win || this.time <= 0){
+                this.saveGameState();
+                this.scene.start("Scene_play_final")
+            }
         }
             
     }
