@@ -1,173 +1,309 @@
-var time = 15;
+onload = function () {
 
-var jinduWord;
-var jindu;
-var sort = randomArr()
-var temPosition={};
-var pintuGroup
-var allowDragStart = true;
-var allowDragStop = false;
-
-// 随机数组
-function randomArr(){
-    var initArr = [0,1,2,3,4,5,6,7,8];
-    var temArr = []
-    while (initArr.length>0){
-        temArr.push(initArr.splice(Math.floor(Math.random()*initArr.length),1)[0]);
+    var startText;
+    var restartText;
+    var welcome;
+    var gameover;
+    var spend = 0;
+    var str = "";
+    var difTime = 0.07;
+  
+    var bootState = function (game) {
+      this.preload = function () {
+        game.load.image('loading', 'assets/preloader.gif');
+      };
+      this.create = function () {
+        game.state.start('loader');
+      };
     }
-    return temArr;
-}
-
-/***********************/
-
-var game = new Phaser.Game(600, 650, Phaser.CANVAS, 'container');
-
-game.States = {};
-
-game.States.main = function() {
-    this.preload = function() {
-        game.load.spritesheet('pintu', 'assets/img/pintu.png',184,184);
-        game.load.image('jindu', 'assets/img/jindu.png');
-        game.load.image('jinduBg', 'assets/img/jinduBg.png');
-        if (typeof(GAME) !== "undefined") {
-            this.load.baseURL = GAME + "/";
+  
+    var loaderState = function (game) {
+      var progressText;
+      this.init = function () {
+        var sprite = game.add.image(game.world.centerX, game.world.centerY, 'loading');
+        sprite.anchor = { x: 0.5, y: 0.5 };
+        progressText = game.add.text(game.world.centerX, game.world.centerY + 30, '0%', { fill: '#fff', fontSize: '16px' });
+        progressText.anchor = { x: 0.5, y: 0.5 };
+      };
+      this.preload = function () {
+        game.load.image('welcome', 'assets/background3.png');
+        game.load.image('gameover', 'assets/background4.png');
+        game.load.spritesheet('card', './assets/card5.png', 700 / 4, 787 / 3, 12);
+        game.load.image('timing', 'assets/timing.png')
+        game.load.onFileComplete.add(function (progress) {
+          progressText.text = progress + '%';
+        });
+  
+      };
+      this.create = function () {
+        if (progressText.text == "100%") {
+          game.state.start('welcome');
         }
-        if (!game.device.desktop) {
-            this.scale.scaleMode = Phaser.ScaleManager.EXACT_FIT;
-            this.scale.forcePortrait = true;
-            this.scale.refresh();
-        }
-    };
-    this.create = function() {
-        // 生成背景色
-        game.stage.backgroundColor = '#492152';
-
-        // 生成进度条
-        var jinduBg = game.add.sprite(42,24,'jinduBg')
-        jindu = game.add.sprite(10,6,'jindu')
-        jinduBg.addChild(jindu)
-        jindu.width = 360;
-        game.add.tween(jindu).to( { width: 0 }, time*1000, Phaser.Easing.Linear.None, true);
-        this.leftTime = time
-        var style = { font: "bold 22px Microsoft Yahei", fill: "#FFF" };
-        jinduWord = game.add.text(400, 1, "还剩 "+ this.leftTime +" 秒", style);
-        jinduBg.addChild(jinduWord);
-        game.time.events.repeat(Phaser.Timer.SECOND , time, this.refreshTime, this)
-
-        // 生成拼图组
-        pintuGroup = game.add.group();
-
-        // 生成拼图块
-        var item;
-        for(var i in sort){
-            item = pintuGroup.create(25 + 184*(Math.floor(i%3)), 70 + 184*(Math.floor(i/3)), 'pintu', sort[i]);
-
-            // 精灵正确的顺序
-            item.sort = sort[i];
-
-            // 精灵当前的顺序
-            item.nowSort = +i;
-
-            // Enable input detection, then it's possible be dragged.
-            item.inputEnabled = true;
-
-            // Make this item draggable.
-            item.input.enableDrag();
-
-            // Then we make it snap to 184x184 grids.
-            item.input.enableSnap(184, 184, false, true,25,70);
-
-            item.input.bringToTop = true;
-
-            // Add a handler to remove it using different options when dropped.
-            item.events.onDragStart.add(this.dragStart, this);
-
-            // Add a handler to remove it using different options when dropped.
-            item.events.onDragStop.add(this.dragStop, this);
-        }
-
-        
-    };
-    this.refreshTime = function(){
-        this.leftTime--;
-        jinduWord.text = "还剩 "+ this.leftTime +" 秒";
-        if(this.leftTime === 0) {
-            window.alert("时间到!");
-            game.paused = true;
-        }
+      };
     }
-    this.dragStart = function(sprite, event){
-        if(allowDragStart){
-            allowDragStart = false;
-            allowDragStop = true;
-            // 正在移动的精灵的原位置
-            temPosition.x = sprite.position.x;
-            temPosition.y = sprite.position.y;
-        }else{
-            sprite.input.disableDrag();
-        }
+  
+    var welcomeState = function (game) {
+  
+      this.init = function () {
+        game.scale.pageAlignHorizontally = true;
+        game.scale.pageAlignVertically = true;
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+  
+      }
+  
+      /**
+       * 
+       */
+      this.preload = function () {
+        this.load.image('easyButton', 'assets/button_green.png');
+        this.load.image('mdButton', 'assets/button_yellow.png');
+        this.load.image('difButton', 'assets/button_orange.png');
+      };
+  
+      this.create = function () {
+        welcome = game.add.image(0, 0, 'welcome');
+        welcome.scale.setTo(0.7, 0.6);
+        startText = game.add.text(12, 110, 'Haz click en una dificultad para empezar', { fill: '#ccc', fontSize: '16px' });
+        startText.scale
+        //startText=game.add.text(game.world.centerX,game.world.centerY,'Click en cualquier lugar para comenzar',{fill:'#000',fontSize:'16px'});
+        //startText.anchor={x:0.5,y:0.5};
+  
+        // botón dificultad fácil
+        let easyButton = this.add.sprite(110, 275, 'easyButton');
+        let easyLabel = this.add.text(165, 290, 'Fácil', { fontSize: '18px', color: '#000' });
+        easyLabel.anchor = { x: 0.5, y: 0.5 };
+  
+        // botón dificultad medio
+        let mdButton = this.add.sprite(110, 300, 'mdButton');
+        let mdLabel = this.add.text(165, 315, 'Medio', { fontSize: '18px', color: '#000' });
+        mdLabel.anchor = { x: 0.5, y: 0.5 };
+  
+        // botón dificultad dificil
+        let difButton = this.add.sprite(110, 325, 'difButton');
+        let difLabel = this.add.text(165, 342, 'Díficil', { fontSize: '18px', color: '#000' });
+        difLabel.anchor = { x: 0.5, y: 0.5 };
+  
+        // lógica del botón dificultad fácil        
+        easyButton.inputEnabled = true;
+        easyButton.input.useHandCursor = true;
+        easyButton.events.onInputDown.add(function () {
+          difTime = 0.05;
+        });
+  
+        // lógica del botón dificultad medio        
+        mdButton.inputEnabled = true;
+        mdButton.input.useHandCursor = true;
+        mdButton.events.onInputDown.add(function () {
+          difTime = 0.07;
+        });
+  
+        // lógica del botón dificultad díficil        
+        difButton.inputEnabled = true;
+        difButton.input.useHandCursor = true;
+        difButton.events.onInputDown.add(function () {
+          difTime = 0.09;
+        });
+  
+        game.input.onDown.addOnce(Down, this);
+      };
     }
-    this.dragStop = function(sprite, event){
-        var t = this;
-        if(allowDragStop){
-            allowDragStop = false;
-
-            if(temPosition.x === sprite.position.x && temPosition.y === sprite.position.y){
-                allowDragStart = true;
-                allowDragStop = false;
-                pintuGroup.setAll('input.draggable',true)
-                // 位置不动不做处理
-            }else{
-                // 精灵移动到边界外返回原位置
-                var temX = (sprite.position.x-25)/184;
-                var temY = (sprite.position.y-70)/184;
-                if(temX<0 || temX>2 || temY<0 || temY>2){
-                    var temTween = game.add.tween(sprite).to( { x: temPosition.x, y: temPosition.y }, 300, Phaser.Easing.Quartic.Out, true);
-                    temTween.onComplete.add(function(){
-                        allowDragStart = true;
-                        allowDragStop = false;
-                        pintuGroup.setAll('input.draggable',true)
-                    })
-                    return;
-                }
-                // 精灵移动到的位置排序
-                var newSort = (sprite.position.x-25)/184 + (sprite.position.y-70)/184*3;
-
-                // 循环group，使原拼图与新拼图替换位置
-                var ifMoveEnd = true
-                pintuGroup.forEach(function(item){
-                    if(item.nowSort === newSort && ifMoveEnd === true){
-                        ifMoveEnd = false;
-                        item.bringToTop()
-                        var tween = game.add.tween(item).to( { x: temPosition.x, y: temPosition.y }, 300, Phaser.Easing.Quartic.Out, true);
-                        tween.onComplete.add(function(){
-                            item.nowSort = sprite.nowSort
-                            sprite.nowSort = newSort;
-                            ifMoveEnd = true;
-                            allowDragStart = true;
-                            allowDragStop = false;
-                            pintuGroup.setAll('input.draggable',true)
-                            if(t.checkSort()){
-                                window.alert("成功！");
-                                game.paused = true;
-                            }
-                        },this)
-                    }
-                })
+  
+    var gameoverState = function (game) {
+      this.create = function () {
+        gameover = game.add.image(0, 0, 'gameover');
+        gameover.scale.setTo(0.7, 0.6);
+        restartText = game.add.text(game.world.centerX, game.world.centerY, 'Click en cualquier lugar para comenzar', { fill: '#fff', fontSize: '16px' });
+        restartText.anchor = { x: 0.5, y: 0.5 };
+        var Text = game.add.text(0, 0, 'Tiempo restante: ' + spend + ' segundos', { fill: '#DC143C', fontSize: '21px' })
+        Text.x = game.world.centerX - Text.width / 2;
+        Text.y = game.world.centerY + Text.height * 1.5;
+        var Text = game.add.text(0, 0, str, { fill: '#DC143C', fontSize: '21px' })
+        Text.x = game.world.centerX - Text.width / 2;
+        Text.y = game.world.centerY + Text.height * 1.5 * 2;
+        game.input.onDown.addOnce(reDown, this);
+      };
+    }
+  
+    var times = 0;
+    var bpre;
+    var bcur;
+    var pre = -1;
+    var cur = -1;
+    var boolean = false;
+    var timing;
+  
+    var gameState = function (game) {
+  
+      this.init = function () {
+        game.scale.pageAlignHorizontally = true;
+        game.scale.pageAlignVertically = true;
+        game.scale.scaleMode = Phaser.ScaleManager.SHOW_ALL;
+      }
+  
+      var bmd = [];
+      var block = [];
+      var card = [];
+      var stime = 0;
+      this.create = function () {
+        //以下代码为获取游戏界面大小
+        var width = game.world.width / 4;
+        var height = game.world.height / 4;
+  
+        //Establecer un cuadrilla de 4 por 4
+        //以下代码为产生贴图数据
+        for (var i = 0; i < 16; i++) {
+          bmd[i] = game.add.bitmapData(width, height);
+          bmd[i].ctx.beginPath();
+          bmd[i].ctx.rect(0, 0, width, height);
+          bmd[i].ctx.strokeStyle = "lightgray";
+          bmd[i].ctx.strokeRect(0, 0, width, height);
+          bmd[i].ctx.fillStyle = 'dimgray';
+        }
+        //以下代码为生成贴图
+        for (var i = 0; i < bmd.length; i++) {
+          bmd[i].ctx.fill();
+          bmd[i].ctx.stroke();
+          block[i] = game.add.sprite(0, 0, bmd[i]);
+          block[i].inputEnabled = true;
+          block[i].tint = 0xffffff;//778899
+        }
+        //以下代码为层次排列
+        for (var i = 1; i < block.length; i++) {
+          if (i % 4 == 0) {
+            block[i].x = block[0].x;
+            block[i].y = block[i - 1].y + block[i - 1].height;
+          } else {
+            block[i].x = block[i - 1].x + block[i - 1].width;
+            block[i].y = block[i - 1].y
+          }
+        }
+  
+        //以下代码为随机排列
+        var x = 0;
+        var y = 0;
+        var r = 0;
+        var d = 0;
+        for (var i = 0; i < block.length; i++) {
+          if (i < 8) { block[i].flag = i; }
+          if (i > 7) { block[i].flag = i - 8; }
+          r = GetRandomNum(i, block.length - 1);
+          d = GetRandomNum(i, block.length - 1);
+          x = block[d].x;
+          y = block[d].y;
+          block[d].x = block[r].x;
+          block[d].y = block[r].y;
+          block[r].x = x;
+          block[r].y = y;
+        }
+        for (var i = 0; i < block.length; i++) {
+          card[i] = game.add.sprite(block[i].x, block[i].y, 'card');
+          card[i].scale.setTo(0.45);
+          card[i].frame = block[i].flag;
+          card[i].alpha = 0;
+        }
+  
+        timing = game.add.sprite(0, 0, 'timing');
+        timing.x = game.world.centerX - timing.width / 2;
+        timing.y = timing.height;
+      };
+  
+      this.update = function () {
+  
+        for (var i = 0; i < block.length; i++) {
+          block[i].events.onInputDown.add(onDown, this);
+        }
+        var j = 0;
+        for (var i = 0; i < block.length; i++) {
+          if (block[i].tint == 0xff7777) { j++ }
+          if (j == block.length) {
+            spend = stime;
+            var sec = 0;
+            game.time.events.loop(Phaser.Timer.SECOND, function () {
+              sec += 1;
+              if (sec == 1) {
+                game.state.start('gameover');
+              }
+            }, this);
+          }
+        }
+  
+        var t = 0;
+        game.time.events.loop(Phaser.Timer.SECOND, function () {
+          t = t + 1;
+          stime = t;
+          if (t <= 10) {
+            str = "Para tí es muy fácil este juego"
+          } else if (t > 10 & t < 20) {
+            str = "Eso fue rápido!!"
+          } else {
+            str = "Muy bien, a tiempo!"
+          }
+          if (timing.width <= 0) {
+            timing.kill();
+            str = "Ánimo, puedes mejorar"
+            stime = 0;
+            game.state.start('gameover');
+          }
+  
+        }, this);
+        timing.width -= difTime;
+      }
+  
+      function onDown(block) {
+        var i = 0;
+        for (var i = 0; i < 16; i++) {
+  
+          card[i].alpha = 0;
+          if (block.x == card[i].x & block.y == card[i].y) {
+            card[i].alpha = 1;
+          }
+        }
+        times += 1;
+        if (times % 2 == 1) {
+          cur = block.flag;
+          bcur = block;
+        } else {
+          pre = cur;
+          bpre = bcur;
+          cur = block.flag;
+          bcur = block;
+          if (pre == cur) {
+            if (bpre == bcur) { return; }
+            block.flag = "";
+            bpre.tint = 0xff7777;
+            block.tint = 0xff7777;
+            bpre.inputEnabled = false;
+            block.inputEnabled = false;
+            for (var i = 0; i < 16; i++) {
+              card[i].alpha = 0;
             }
+  
+          }
         }
+      }
     }
-    this.checkSort = function(){
-        var ifFinash = true;
-        pintuGroup.forEach(function(item){
-            if(item.sort !== item.nowSort){
-                ifFinash = false;
-            }
-        })
-        return ifFinash;
+  
+    function Down() {
+      startText.destroy();
+      game.state.start('main');
     }
-};
-
-game.state.add('main', game.States.main);
-
-game.state.start('main');
+  
+    function reDown() {
+      restartText.destroy();
+      game.state.start('main');
+    }
+  
+    var game = new Phaser.Game(320, 480, Phaser.CANVAS);
+    game.state.add('boot', bootState);
+    game.state.add('loader', loaderState);
+    game.state.add('welcome', welcomeState);
+    game.state.add('main', gameState);
+    game.state.add('gameover', gameoverState);
+    game.state.start('boot');
+  }
+  
+  function GetRandomNum(Min, Max) {
+    var Range = Max - Min;
+    var Rand = Math.random();
+    return (Min + Math.round(Rand * Range));
+  }

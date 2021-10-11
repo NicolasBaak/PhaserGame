@@ -25,9 +25,10 @@ class Scene_play extends Phaser.Scene {
         this.sort = randomArr()  
         this.pintuGroup
         //Variables del tiempo
-        this.time = 20;
+        this.time = 15;
         this.timeElapsed = 0;
         this.maxTime = 1;
+        //Piezas rompecabeza
         this.tamaSprite = 184/2;
         this.posX = 560
         this.posY = 285  
@@ -41,6 +42,7 @@ class Scene_play extends Phaser.Scene {
         this.game.sound.stopAll();
 
         this.sound.add('M_puzzle', {loop:true, volume: 0.3}).play();
+
         this.background = this.add.image(center_width, center_height , 'bg-rompecabezas');
 
         //Texto con informacion sobre los dientes
@@ -64,6 +66,7 @@ class Scene_play extends Phaser.Scene {
 
         //Tiempo
         this.timeText = this.add.bitmapText(center_width+50, 180, 'minecraft',`Tiempo: ${this.time} seg.`).setFontSize(28);
+        
         var tween = this.tweens.add({
             targets: this.jindu,
             props: {
