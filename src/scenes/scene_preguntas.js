@@ -1,15 +1,15 @@
 import Button from '../gameObjects/button.js';
 
-// Objeto inicializador del juego
-let initialGameState = {
+let initialValue = {
     currentQuestion: 0,
     recordedAnswer: {},
     username: ''
-};
+}
 
 // Variable que contiene el estado del juego
-let gameState = initialGameState;
-            
+let gameState = initialValue;
+let numQuestion = 0;
+let nextQuestionSetTimeOut;
             
 class Scene_preguntas extends Phaser.Scene {
 
@@ -18,9 +18,7 @@ class Scene_preguntas extends Phaser.Scene {
     }
 
     create(){
-
-        gameState = initialGameState;
-        
+        this.maxQuestions = 5;
         let nombres = document.querySelectorAll('input');
         nombres.forEach((nombre)=>{
             nombre.remove();
@@ -28,11 +26,12 @@ class Scene_preguntas extends Phaser.Scene {
    
         // carga estado del juego
         this.loadGameState();
+
         //let questions = this.cache.json.get('questions');
         //let question = questions[gameState.currentQuestion];
         let question = this.getQuestion(gameState.currentQuestion);
-        console.log(gameState.currentQuestion);
-        console.log("pregunta:", question);
+        //console.log(gameState.currentQuestion);
+        //console.log("pregunta:", question);
         // opción selecionada: undefined 'a', 'b' ó 'c'
         let selectedAnswer = gameState.recordedAnswer[gameState.currentQuestion];
    
@@ -46,17 +45,13 @@ class Scene_preguntas extends Phaser.Scene {
         let center_height = this.sys.game.config.height/2;
     
         this.background = this.add.image(center_width, center_height , 'bg-quizz');
-        let style = { fontFamily: 'Minecraft, Georgia, "Goudy Bookletter 1911", Times, serif', fontSize: '24px'}
     
-        //texto con informacion sobre los dientes
-        //this.pregunta = this.add.text(center_width-300, center_height-200, question.text , style);
-        this.pregunta = this.add.bitmapText(center_width-250, center_height-180, 'minecraft',question.text).setMaxWidth(250)
+        this.pregunta = this.add.bitmapText(center_width-250, center_height-180, 'minecraft', question.text).setMaxWidth(250)
         
         //Informacion del jugador
-        this.jugador = this.add.bitmapText(center_width-240, center_height,'minecraft',  `Pregunta ${gameState.currentQuestion+1} para ${gameState.username}! `).setMaxWidth(280).setFontSize(24);
+        this.jugador = this.add.bitmapText(center_width-250, center_height+30, 'minecraft',  `Pregunta ${gameState.currentQuestion+1} para ${gameState.username}! `).setMaxWidth(280).setFontSize(24);
         
         const buttonMenu = new Button( this, center_width-100, center_height+110, 'button-menu', 'button-menu-hover').setScale(0.6);
-
         const opcA = new Button( this, center_width+150, center_height-120, 'button-menu', 'button-menu-hover').setScale(1.2);
         const opcB = new Button( this, center_width+150, center_height, 'button-menu', 'button-menu-hover').setScale(1.2);
         const opcC = new Button( this, center_width+150, center_height+120, 'button-menu', 'button-menu-hover').setScale(1.2);
@@ -65,6 +60,7 @@ class Scene_preguntas extends Phaser.Scene {
         buttonMenu.text.text = 'Regresar';
         buttonMenu.setInteractive()
         .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
+            clearTimeout(nextQuestionSetTimeOut);
             click.play();
             this.scene.start('Menu');
         })
@@ -85,24 +81,27 @@ class Scene_preguntas extends Phaser.Scene {
                 this.pregunta.setText('La respuesta fue incorrecta 🤔');
             }
             // ir a la proxima this.pregunta, con 2 segundos de espera
-            setTimeout(() => {
+            nextQuestionSetTimeOut = setTimeout(() => {
                 let nextQuestion = gameState.currentQuestion + 1;
-
-                if (this.questionExists(nextQuestion)) {
+                numQuestion++
+                //this.questionExists(nextQuestion)
+                if (numQuestion < this.maxQuestions) {
+                    
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
                     this.saveGameState();
                     this.scene.restart();
                 }
                 else {
+                    numQuestion = 0
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
                     this.saveGameState();
+                    this.resetGameState();
                     this.scene.start('Scene_preguntas_final');
                 }
             }, 2000);
         })
-
 
         this.add.existing(opcB);
         opcB.text.text = question.b;
@@ -120,19 +119,23 @@ class Scene_preguntas extends Phaser.Scene {
                 this.pregunta.setText('La respuesta fue incorrecta 🤔');
             }
             // ir a la proxima this.pregunta, con 2 segundos de espera
-            setTimeout(() => {
+            nextQuestionSetTimeOut = setTimeout(() => {
                 let nextQuestion = gameState.currentQuestion + 1;
-
-                if (this.questionExists(nextQuestion)) {
+                numQuestion++
+               // this.questionExists(nextQuestion)
+                if (numQuestion < this.maxQuestions) {
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
                     this.saveGameState();
                     this.scene.restart();
+                    
                 }
                 else {
+                    numQuestion = 0
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
                     this.saveGameState();
+                    this.resetGameState();
                     this.scene.start('Scene_preguntas_final');
                 }
             }, 2000);
@@ -155,42 +158,36 @@ class Scene_preguntas extends Phaser.Scene {
                 this.pregunta.setText('La respuesta fue incorrecta 🤔');
             }
             // ir a la proxima pregunta, con 2 segundos de espera
-            setTimeout(() => {
+            nextQuestionSetTimeOut = setTimeout(() => {
                 let nextQuestion = gameState.currentQuestion + 1;
-
-                if (this.questionExists(nextQuestion)) {
+                numQuestion++
+                if (numQuestion < this.maxQuestions) {
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
                     this.saveGameState();
                     this.scene.restart();
                 }
                 else {
+                    numQuestion = 0;
                     gameState.recordedAnswer[gameState.currentQuestion] = selectedAnswer;
                     gameState.currentQuestion = nextQuestion;
                     this.saveGameState();
+                    this.resetGameState();
                     this.scene.start('Scene_preguntas_final');
                 }
             }, 2000);
         })
     }
 
-    
-    update(){
-    
-    }
-
-    
-
     getQuestion = function (questionID) {
         let questions = this.cache.json.get('questions');
-    
         // Desordena el arreglo de preguntas para que no salgan en el mismo orden
         while (questions[0].text == '01 Primera Pregunta' && questions[1].text == '02 Segunda Pregunta' && questions[2].text == '03 Tercera Pregunta') {
             // console.log(questions);
             questions = questions.sort(function () {
                 return Math.random() - 0.5;
             });
-            console.log("new: ", questions);
+            //console.log("new: ", questions);
         }
     
         return questions[questionID]; // puede ser undefined
@@ -212,8 +209,10 @@ class Scene_preguntas extends Phaser.Scene {
      *  limpia el estado actual del juego y lo inicializa
      */
     resetGameState() {
-        localStorage.clear();
-        gameState = initialGameState;
+        gameState = {
+            currentQuestion: 0,
+            recordedAnswer: {},
+            username: ''};
     }
 
     /**
@@ -233,7 +232,6 @@ class Scene_preguntas extends Phaser.Scene {
 
         if (str != null) {
             gameState = JSON.parse(str);
-            // console.log(str)
         }
 
         let name = localStorage.getItem("nombreJugador");

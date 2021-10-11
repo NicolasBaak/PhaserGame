@@ -7,7 +7,7 @@ class Bootloader extends Phaser.Scene {
     preload(){
 
         this.load.on("complete", ()=>{
-            this.scene.start("Scene_play");
+            this.scene.start("Menu");
         });
 
         //Musica de fondo para cada escena

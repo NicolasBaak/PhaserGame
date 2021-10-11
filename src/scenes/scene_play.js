@@ -40,7 +40,7 @@ class Scene_play extends Phaser.Scene {
         
         this.game.sound.stopAll();
 
-        //this.sound.add('M_puzzle', {loop:true, volume: 0.3}).play();
+        this.sound.add('M_puzzle', {loop:true, volume: 0.3}).play();
         this.background = this.add.image(center_width, center_height , 'bg-rompecabezas');
 
         //Texto con informacion sobre los dientes
