@@ -23,7 +23,7 @@ class Scene_play extends Phaser.Scene {
         this.temPosition = {};
         this.jindu;
         this.sort = randomArr()  
-        this.pintuGroup
+        this.puzzleGroup
         //Variables del tiempo
         this.time = 15;
         this.timeElapsed = 0;
@@ -74,14 +74,14 @@ class Scene_play extends Phaser.Scene {
             }
         });
         
-        this.pintuGroup = this.add.group();
+        this.puzzleGroup = this.add.group();
         let item;
         
+        let numPuzzle = Math.floor(Math.random() * ((6) - (1) + 1) + 1)
         for (var i in this.sort) {
-            item = this.pintuGroup.create(this.posX +  this.tamaSprite * (Math.floor(i % 3)),   this.posY + this.tamaSprite * (Math.floor(i / 3)), 'pintu', this.sort[i]);
+            item = this.puzzleGroup.create(this.posX +  this.tamaSprite * (Math.floor(i % 3)),   this.posY + this.tamaSprite * (Math.floor(i / 3)), 'puzzle-'+numPuzzle.toString(), this.sort[i]);
             item.sort = this.sort[i];
             item.nowSort = +i;
-            //console.log("principio", item.sort, item.nowSort)
             item.setInteractive();
             this.input.setDraggable(item);
             this.input.dragDistanceThreshold = 16;
@@ -119,7 +119,7 @@ class Scene_play extends Phaser.Scene {
 
                 var newSort = (this.x- this.scene.posX)/this.scene.tamaSprite + (this.y-this.scene.posY)/this.scene.tamaSprite*3;
                 
-                Phaser.Actions.Call(this.scene.pintuGroup.getChildren(), function(item) {
+                Phaser.Actions.Call(this.scene.puzzleGroup.getChildren(), function(item) {
                     if(item.nowSort === newSort){
                         var t = this;
                         item.setDepth(1);
@@ -150,7 +150,7 @@ class Scene_play extends Phaser.Scene {
         }
 
         
-        this.pintuGroup.children.iterate((child) => {
+        this.puzzleGroup.children.iterate((child) => {
         child.setScale(0.5);
         });
         
@@ -158,7 +158,7 @@ class Scene_play extends Phaser.Scene {
 
     checkSort(){
         var ifFinash = true;
-        this.pintuGroup.getChildren().forEach(function(item) {
+        this.puzzleGroup.getChildren().forEach(function(item) {
             if(item.sort !== item.nowSort){
                 ifFinash = false;
             }

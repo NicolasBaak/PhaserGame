@@ -85,7 +85,7 @@ class Memoria extends Phaser.Scene{
             block[i] = this.add.sprite(440, 160, bmd[i]);
             block[i].setOrigin(0,0)
             block[i].setInteractive();
-            block[i].tint = 0xffffff;//778899
+            block[i].tint = 0x6FA990//778899
            
           }
 
@@ -151,8 +151,8 @@ class Memoria extends Phaser.Scene{
                 if (pre == cur) {
                   if (bpre == bcur) { return; }
                   this.flag = "";
-                  bpre.tint = 0xff7777;
-                  this.tint = 0xff7777;
+                  bpre.tint = 0xC3CD8E;
+                  this.tint = 0xC3CD8E;
                   bpre.disableInteractive();
                   this.disableInteractive();
                   for (var i = 0; i < 12; i++) {
@@ -181,7 +181,7 @@ class Memoria extends Phaser.Scene{
       var ifFinash = true;
       for(let i =0; i< 12; i++){
         //console.log("check: ", block[i].tintTopLeft);
-        if(block[i].tintTopLeft === 16777215){
+        if(block[i].tintTopLeft ===  7317904){
           ifFinash = false;
         }
       }

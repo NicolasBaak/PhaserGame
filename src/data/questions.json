@@ -1,9 +1,9 @@
   [
     {
       "text": "01 ¿Desde cuando deben los niños empezar a visitar al dentista?",
-      "a": "Después de que todos sus dientes de leche han salido",
+      "a": "Después de que salieron los dientes",
       "b": "Al salir los primeros 3 dientes",
-      "c": "Cuando tengan un año de edad o tengan su primer diente",
+      "c": "Cuando tengan un año de edad",
       "img": "Image01",
       "answer": "c"
     },
@@ -26,8 +26,8 @@
     {
       "text": "04 ¿Cuáles son las caries dentales?",
       "a": "Una infección viral de la boca",
-      "b": "Una enfermedad infecciosa causada por la descomposición bacteriana que daña la estructura del diente",
-      "c": "Son agujeros que ocurren naturalmente en el diente",
+      "b": "Una enfermedad infecciosa",
+      "c": "Son agujeros que ocurren naturalmente",
       "img": "Image04",
       "answer": "b"
     },
@@ -41,9 +41,9 @@
     },
     {
       "text": "06 ¿Qué es un sellador dental?",
-      "a": "Un empaste dental utilizado para tratar las caries",
-      "b": "Una pasta de dientes prescripción especial",
-      "c": "Una cubierta protectora para los molares primero y segundo",
+      "a": "Empaste dental para tratar las caries",
+      "b": "Pasta de dientes prescripción especial",
+      "c": "Una cubierta protectora para molares",
       "img": "Image06",
       "answer": "c"
     },
@@ -74,8 +74,8 @@
     {
       "text": "10 ¿Cómo se deben cepillar los dientes?",
       "a": "Con mucha fuerza",
-      "b": "Con movimientos horizontales, de derecha a izquierda",
-      "c": "Con movimiento verticales o circulares, de arriba abajo",
+      "b": "Con movimientos horizontales",
+      "c": "Con movimientos verticales o circulares, de arriba abajo",
       "img": "Image10",
       "answer": "c"
     },
@@ -106,7 +106,7 @@
     {
       "text": "14 ¿Cada cuánto tiempo se debe ir al dentista?",
       "a": "Sólo cuando me duele algo",
-      "b": "Una o más veces al año, aunque no tenga dolores",
+      "b": "Una o más veces al año",
       "c": "Una vez cada dos años",
       "img": "Image14",
       "answer": "b"

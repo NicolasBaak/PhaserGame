@@ -60,7 +60,7 @@ class Scene_preguntas_final extends Phaser.Scene{
         this.miscore = this.add.bitmapText(center_width-80, center_height-100, 'minecraft' ,   'Aciertos - ' + totalHits + ' de ' + (totalHits + totalQuestion) );
 
          // texto de Porcentaje
-         this.scoreText = this.add.bitmapText(center_width-80, center_height-50,  'minecraft' , 'Porcentaje - ¡¡' + Math.floor(score) + '!!' );
+        // this.scoreText = this.add.bitmapText(center_width-80, center_height-50,  'minecraft' , 'Porcentaje - ¡¡' + Math.floor(score) + '!!' );
 
     // textos que se muestran de acuerdo al porcentaje obtenido
     if (Math.floor(score) <= 30) {
