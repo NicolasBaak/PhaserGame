@@ -77,8 +77,8 @@ class Scene_preguntas_final extends Phaser.Scene{
         let scoreText = this.add.bitmapText(center_width-200, center_height, 'minecraft' , 'Excelente ' + username+ ', muchas felicidades!!! 🥇, el esfuerzo de tu estudio se nota').setCenterAlign().setMaxWidth(500);
     }
 
-    const restartButton = new Button( this, center_width-100, center_height+130, 'button-menu', 'button-menu-hover').setScale(0.6);
-    const MenuButton = new Button( this, center_width+100, center_height+130, 'button-menu', 'button-menu-hover').setScale(0.6);
+    const restartButton = new Button( this, center_width-100, center_height+130).setScale(0.6);
+    const MenuButton = new Button( this, center_width+100, center_height+130).setScale(0.6);
       
     restartButton.text.text = 'Nuevo Intento';
     MenuButton.text.text = 'Menu principal';

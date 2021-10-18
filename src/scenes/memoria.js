@@ -59,7 +59,7 @@ class Memoria extends Phaser.Scene{
             }
         });
 
-        const buttonMenu = new Button( this, center_width-140, center_height+140, 'button-menu', 'button-menu-hover').setScale(0.5);
+        const buttonMenu = new Button( this, center_width-140, center_height+140).setScale(0.5);
         buttonMenu.text.text = 'Regresar';
         this.add.existing(buttonMenu);
         buttonMenu.setInteractive()

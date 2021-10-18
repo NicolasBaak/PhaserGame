@@ -29,7 +29,7 @@ class InstruccionesQuiz extends Phaser.Scene {
         nombre.classList.add('input-nombre');
         document.querySelector('main').insertBefore(nombre, document.querySelector('#container'));
 
-        const buttonPreguntas = new Button( this, center_width, center_height+100, 'button-menu', 'button-menu-hover');
+        const buttonPreguntas = new Button( this, center_width, center_height+100);
         buttonPreguntas.text.text = 'Iniciar';
         this.add.existing(buttonPreguntas);
         buttonPreguntas.setInteractive()

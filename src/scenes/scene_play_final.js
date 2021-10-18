@@ -28,7 +28,7 @@ class Scene_play_final extends Phaser.Scene {
             this.add.bitmapText(center_width-250, center_height-100, 'minecraft',"Casi lo logras, ¡vuelve a intentarlo! ¡¡tu puedes!!").setFontSize(42).setMaxWidth(center_width);
         }
 
-        const buttonMenu = new Button( this, center_width, center_height+120, 'button-menu', 'button-menu-hover');
+        const buttonMenu = new Button( this, center_width, center_height+120);
         buttonMenu.text.text = 'Regresar';
         this.add.existing(buttonMenu);
         buttonMenu.setInteractive()

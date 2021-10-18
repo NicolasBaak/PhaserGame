@@ -1,6 +1,6 @@
 class Button extends Phaser.GameObjects.Container {
     
-    constructor(scene, x, y, upImage, overImage){
+    constructor(scene, x, y, upImage='button-menu', overImage='button-menu-hover'){
         super(scene, x, y);
 
         this.upImage = scene.add.image( 0, 0, upImage).setScale(1.5, 1);

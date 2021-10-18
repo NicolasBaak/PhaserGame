@@ -51,10 +51,10 @@ class Scene_preguntas extends Phaser.Scene {
         //Informacion del jugador
         this.jugador = this.add.bitmapText(center_width-250, center_height+30, 'minecraft',  `Pregunta ${gameState.currentQuestion+1} para ${gameState.username}! `).setMaxWidth(280).setFontSize(24);
         
-        const buttonMenu = new Button( this, center_width-100, center_height+110, 'button-menu', 'button-menu-hover').setScale(0.6);
-        const opcA = new Button( this, center_width+150, center_height-120, 'button-menu', 'button-menu-hover').setScale(1.2);
-        const opcB = new Button( this, center_width+150, center_height, 'button-menu', 'button-menu-hover').setScale(1.2);
-        const opcC = new Button( this, center_width+150, center_height+120, 'button-menu', 'button-menu-hover').setScale(1.2);
+        const buttonMenu = new Button( this, center_width-100, center_height+110).setScale(0.6);
+        const opcA = new Button( this, center_width+150, center_height-120).setScale(1.2);
+        const opcB = new Button( this, center_width+150, center_height).setScale(1.2);
+        const opcC = new Button( this, center_width+150, center_height+120).setScale(1.2);
 
         this.add.existing(buttonMenu);
         buttonMenu.text.text = 'Regresar';

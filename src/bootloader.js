@@ -23,27 +23,26 @@ class Bootloader extends Phaser.Scene {
         this.load.audio('click', './src/assets/audio/click.ogg');
         this.load.audio('click-answer', './src/assets/audio/click-answer.mp3');
         this.load.audio('clickRight', './src/assets/audio/right.ogg');
-        //MENU BOOT
+        //Background de los juegos
         this.load.image("button-menu" , "./src/assets/images/ButtonMenu.png");
         this.load.image("bg-menu" , "./src/assets/images/bg_menu.jpeg");
         this.load.image("bg-quizz" , "./src/assets/images/bg_quizz.jpeg");
         this.load.image("bg-nombre" , "./src/assets/images/bg_nombre.jpeg");
+        // Botones
         this.load.image("bg-rompecabezas" , "./src/assets/images/bg_rompecabezas.jpeg");
         this.load.image("button-menu-hover" , "./src/assets/images/ButtonMenuHover.png");
     
-        //this.load.spritesheet("puzzle-1", "./src/assets/images/puzzle-1.png", { frameWidth: 184, frameHeight: 184 });
-        this.load.image("jindu", "./src/assets/images/jindu.png");
+       this.load.image("jindu", "./src/assets/images/jindu.png");
         this.load.image("jinduBg", "./src/assets/images/jinduBg.png");
+
         //Cargar imagenes del rompecabezas 
         for(var i = 1;i < 6;i++) {
             this.load.spritesheet("puzzle-"+i.toString(), "./src/assets/images/puzzle-"+i.toString()+".png", { frameWidth: 184, frameHeight: 184 });
             //this.game.load.image(i.toString(), 'assets/images/'+i.toString()+'.png');
         }
 
-        this.load.bitmapFont('minecraft', './src/assets/fonts/minecraft.png', './src/assets/fonts/minecraft.xml');
-
-         
-     
+        this.load.bitmapFont('minecraft', './src/assets/fonts/minecraft.png', './src/assets/fonts/minecraft.xml');  
+    
     }
 }
 

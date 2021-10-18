@@ -19,7 +19,7 @@ class Menu extends Phaser.Scene {
         let clickAudio = this.sound.add('click', {loop:false});
         this.sound.add('M_menu', {loop:true, volume: 0.3}).play();
    
-        const buttonRompecabezas = new Button( this, center_width-200, center_height+20, 'button-menu', 'button-menu-hover').setScale(0.8);
+        const buttonRompecabezas = new Button( this, center_width-200, center_height+20).setScale(0.8);
         buttonRompecabezas.text.text = 'Puzzle';
         this.add.existing(buttonRompecabezas);
         buttonRompecabezas.setInteractive()
@@ -28,7 +28,7 @@ class Menu extends Phaser.Scene {
             this.scene.start('Scene_play');
         })
         
-        const buttonPreguntas = new Button( this, center_width , center_height+20, 'button-menu', 'button-menu-hover').setScale(0.8);
+        const buttonPreguntas = new Button( this, center_width , center_height+20).setScale(0.8);
         buttonPreguntas.text.text = 'Preguntas';
         this.add.existing(buttonPreguntas);
         buttonPreguntas.setInteractive()
@@ -37,7 +37,7 @@ class Menu extends Phaser.Scene {
             this.scene.start('InstruccionesQuiz');         
         })
         
-        const buttonMemoria = new Button( this, center_width + 200, center_height+20, 'button-menu', 'button-menu-hover').setScale(0.8);
+        const buttonMemoria = new Button( this, center_width + 200, center_height+20).setScale(0.8);
         buttonMemoria.text.text = 'Memorama';
         this.add.existing(buttonMemoria);
         buttonMemoria.setInteractive()

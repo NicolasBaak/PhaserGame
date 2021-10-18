@@ -49,7 +49,7 @@ class Scene_play extends Phaser.Scene {
         //this.add.text(center_width-250, center_height-50, 'Un tercio de tus \ndientes está por \ndebajo de la encía.', style);
 
 
-        const buttonMenu = new Button( this, center_width-100, center_height+120, 'button-menu', 'button-menu-hover').setScale(0.6);
+        const buttonMenu = new Button( this, center_width-100, center_height+120).setScale(0.6);
         buttonMenu.text.text = 'Regresar';
         this.add.existing(buttonMenu);
         buttonMenu.setInteractive()
@@ -77,7 +77,8 @@ class Scene_play extends Phaser.Scene {
         this.puzzleGroup = this.add.group();
         let item;
         
-        let numPuzzle = Math.floor(Math.random() * ((6) - (1) + 1) + 1)
+        let numPuzzle = Math.floor(Math.random() * ((5) - (1) + 1) + 1)
+       
         for (var i in this.sort) {
             item = this.puzzleGroup.create(this.posX +  this.tamaSprite * (Math.floor(i % 3)),   this.posY + this.tamaSprite * (Math.floor(i / 3)), 'puzzle-'+numPuzzle.toString(), this.sort[i]);
             item.sort = this.sort[i];
