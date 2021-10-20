@@ -18,20 +18,16 @@ class Memoria extends Phaser.Scene{
         super({key: 'Memoria'});       
     }
 
-    init(){
-        //Variables del tiempo
-        this.time = 25;
+    init(data){
+       //Variables del tiempo
+        this.level = data.nivel;
+        this.time = 40 - (this.level * 5);
         this.timeElapsed = 0;
         this.maxTime = 1;
     }
-    preload(){
-      this.resetGameState();
-      //Memorama
-      this.load.spritesheet('card', './src/assets/images/card5.png', {frameWidth: (700 / 4), frameHeight:  (787 / 3), endFrame: 12});
-    }
-   
+    
     create(){
-        
+        this.resetGameState();
         this.game.sound.stopAll();
         this.sound.add('M_memorama', {loop:true, volume: 0.3}).play();
 
@@ -46,11 +42,14 @@ class Memoria extends Phaser.Scene{
         this.title = this.add.bitmapText(230, 180, 'minecraft','Memorama').setFontSize(40);
         
 
-        this.jinduBg = this.add.sprite(center_width-170, center_height-50, 'jinduBg').setScale(0.4)
-        this.jindu = this.add.sprite(center_width-170, center_height-50, 'jindu').setScale(0.5)
+        this.jinduBg = this.add.sprite(center_width-175, center_height-50, 'jinduBg').setScale(0.4)
+        this.jindu = this.add.sprite(center_width-175, center_height-50, 'jindu').setScale(0.5)
+
+        //Nivel
+        this.timeText = this.add.bitmapText(center_width-280, center_height, 'minecraft',`¡ Nivel ${this.level } de 3 !`).setFontSize(35);
 
         //Tiempo
-        this.timeText = this.add.bitmapText(center_width-250, center_height-90, 'minecraft',`Tiempo: ${this.time} seg.`).setFontSize(28);
+        this.timeText = this.add.bitmapText(center_width-255, center_height-90, 'minecraft',`Tiempo: ${this.time} seg.`).setFontSize(28);
 
         var tween = this.tweens.add({
             targets: this.jindu,
@@ -59,12 +58,9 @@ class Memoria extends Phaser.Scene{
             }
         });
 
-        const buttonMenu = new Button( this, center_width-140, center_height+140).setScale(0.5);
-        buttonMenu.text.text = 'Regresar';
+        const buttonMenu = new Button( this, center_width-140, center_height+140, 'Regresar').setScale(0.5);
         this.add.existing(buttonMenu);
-        buttonMenu.setInteractive()
-        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
-            
+        buttonMenu.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
             this.scene.start('Menu');
          })
         
@@ -120,7 +116,7 @@ class Memoria extends Phaser.Scene{
 
           
           for (var i = 0; i < block.length; i++) {
-            card[i] = this.add.sprite(block[i].x, block[i].y, 'card');
+            card[i] = this.add.sprite(block[i].x, block[i].y, 'card'+this.level.toString());
             card[i].setOrigin(-0.1, 0);
             card[i].setScale(0.45);
             card[i].setFrame (block[i].flag);
@@ -219,11 +215,15 @@ class Memoria extends Phaser.Scene{
           this.time--;
           this.timeText.setText("Tiempo: " + this.time.toString()+ " seg.");
           this.timeElapsed = 0; 
-          if(gameState.win || this.time <= 0){
-            this.saveGameState();
-            
-            this.scene.start("Scene_play_final")
+          if(gameState.win && this.level  < 3){
+            //console.log("fin del nivel: "+ this.level  )
+              this.level  += 1
+              this.scene.restart({ nivel: this.level })
+          }else if((gameState.win && this.level >= 3) ||  this.time <= 0){
+              this.saveGameState();
+              this.scene.start("Scene_play_final")
           }
+         
       }
     }
 }

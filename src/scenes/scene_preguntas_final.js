@@ -77,23 +77,18 @@ class Scene_preguntas_final extends Phaser.Scene{
         let scoreText = this.add.bitmapText(center_width-200, center_height, 'minecraft' , 'Excelente ' + username+ ', muchas felicidades!!! 🥇, el esfuerzo de tu estudio se nota').setCenterAlign().setMaxWidth(500);
     }
 
-    const restartButton = new Button( this, center_width-100, center_height+130).setScale(0.6);
-    const MenuButton = new Button( this, center_width+100, center_height+130).setScale(0.6);
+    let restartButton = new Button( this, center_width-100, center_height+130, 'Nuevo Intento').setScale(0.6);
+    let MenuButton = new Button( this, center_width+100, center_height+130, 'Menu principal').setScale(0.6);
       
-    restartButton.text.text = 'Nuevo Intento';
-    MenuButton.text.text = 'Menu principal';
-
     this.add.existing(restartButton);
-    restartButton.setInteractive()
-    .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
+    restartButton.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
         this.resetGameState();
         // location.reload();
         this.scene.start('InstruccionesQuiz');
     })
     
     this.add.existing(MenuButton);
-    MenuButton.setInteractive()
-    .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
+    MenuButton.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
         this.resetGameState();
         // location.reload();
         this.scene.start('Menu');
@@ -152,9 +147,5 @@ class Scene_preguntas_final extends Phaser.Scene{
         }
     }
 }
-
-
-
-
 
 export default Scene_preguntas_final;

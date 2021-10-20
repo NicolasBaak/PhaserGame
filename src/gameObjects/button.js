@@ -1,12 +1,11 @@
 class Button extends Phaser.GameObjects.Container {
     
-    constructor(scene, x, y, upImage='button-menu', overImage='button-menu-hover'){
+    constructor(scene, x, y, text, upImage='button-menu', overImage='button-menu-hover'){
         super(scene, x, y);
 
         this.upImage = scene.add.image( 0, 0, upImage).setScale(1.5, 1);
         this.overImage = scene.add.image( 0, 0, overImage).setScale(1.5, 1);
-        this.text = scene.add.bitmapText(0, 0, 'minecraft','', 32, 1).setMaxWidth(this.upImage.width)
-        .setOrigin(0.5, 0.5)
+        this.text = scene.add.bitmapText(0, 0, 'minecraft', text, 32, 1).setMaxWidth(this.upImage.width).setOrigin(0.5, 0.5)
 
         this.overImage
 

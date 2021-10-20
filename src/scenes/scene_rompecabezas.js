@@ -13,10 +13,10 @@ function randomArr() {
     return temArr;
 }
 
-class Scene_play extends Phaser.Scene {
+class Scene_rompecabezas extends Phaser.Scene {
 
     constructor() {
-        super({ key: "Scene_play" });
+        super({ key: "Scene_rompecabezas" });
     }
     
     init(){
@@ -25,7 +25,7 @@ class Scene_play extends Phaser.Scene {
         this.sort = randomArr()  
         this.puzzleGroup
         //Variables del tiempo
-        this.time = 15;
+        this.time = 20;
         this.timeElapsed = 0;
         this.maxTime = 1;
         //Piezas rompecabeza
@@ -49,11 +49,9 @@ class Scene_play extends Phaser.Scene {
         //this.add.text(center_width-250, center_height-50, 'Un tercio de tus \ndientes está por \ndebajo de la encía.', style);
 
 
-        const buttonMenu = new Button( this, center_width-100, center_height+120).setScale(0.6);
-        buttonMenu.text.text = 'Regresar';
+        const buttonMenu = new Button( this, center_width-100, center_height+120, "Regresar").setScale(0.6);
         this.add.existing(buttonMenu);
-        buttonMenu.setInteractive()
-        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
+        buttonMenu.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
            this.scene.start('Menu');
         })
 
@@ -77,7 +75,7 @@ class Scene_play extends Phaser.Scene {
         this.puzzleGroup = this.add.group();
         let item;
         
-        let numPuzzle = Math.floor(Math.random() * ((5) - (1) + 1) + 1)
+        let numPuzzle = Math.floor(Math.random() * ((4) - (1) + 1) + 1)
        
         for (var i in this.sort) {
             item = this.puzzleGroup.create(this.posX +  this.tamaSprite * (Math.floor(i % 3)),   this.posY + this.tamaSprite * (Math.floor(i / 3)), 'puzzle-'+numPuzzle.toString(), this.sort[i]);
@@ -201,4 +199,4 @@ class Scene_play extends Phaser.Scene {
 
 }
 
-export default Scene_play;
+export default Scene_rompecabezas;

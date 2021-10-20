@@ -51,26 +51,21 @@ class Scene_preguntas extends Phaser.Scene {
         //Informacion del jugador
         this.jugador = this.add.bitmapText(center_width-250, center_height+30, 'minecraft',  `Pregunta ${gameState.currentQuestion+1} para ${gameState.username}! `).setMaxWidth(280).setFontSize(24);
         
-        const buttonMenu = new Button( this, center_width-100, center_height+110).setScale(0.6);
-        const opcA = new Button( this, center_width+150, center_height-120).setScale(1.2);
-        const opcB = new Button( this, center_width+150, center_height).setScale(1.2);
-        const opcC = new Button( this, center_width+150, center_height+120).setScale(1.2);
+        const buttonMenu = new Button( this, center_width-100, center_height+110, 'Regresar').setScale(0.6);
+        const opcA = new Button( this, center_width+150, center_height-120, question.a).setScale(1.2);
+        const opcB = new Button( this, center_width+150, center_height, question.b).setScale(1.2);
+        const opcC = new Button( this, center_width+150, center_height+120, question.c).setScale(1.2);
 
         this.add.existing(buttonMenu);
-        buttonMenu.text.text = 'Regresar';
-        buttonMenu.setInteractive()
-        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
+        buttonMenu.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
             clearTimeout(nextQuestionSetTimeOut);
             click.play();
             this.scene.start('Menu');
         })
         
         this.add.existing(opcA);
-        opcA.text.text = question.a;
-        opcA.text.setFontSize(20);
-        opcA.text.setMaxWidth(opcC.upImage.width*1.3)
-        opcA.setInteractive()
-        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
+        opcA.text.setFontSize(20).setMaxWidth(opcC.upImage.width*1.3)
+        opcA.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
             clickAnswerAudio.play();
             selectedAnswer = 'a';
             if (selectedAnswer == question.answer) {
@@ -104,11 +99,8 @@ class Scene_preguntas extends Phaser.Scene {
         })
 
         this.add.existing(opcB);
-        opcB.text.text = question.b;
-        opcB.text.setFontSize(20);
-        opcB.text.setMaxWidth(opcC.upImage.width*1.3)
-        opcB.setInteractive()
-        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
+        opcB.text.setFontSize(20).setMaxWidth(opcC.upImage.width*1.3)
+        opcB.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
             clickAnswerAudio.play();
             selectedAnswer = 'b';
             if (selectedAnswer == question.answer) {
@@ -143,11 +135,8 @@ class Scene_preguntas extends Phaser.Scene {
         
 
         this.add.existing(opcC);
-        opcC.text.text = question.c;
-        opcC.text.setFontSize(20);
-        opcC.text.setMaxWidth(opcC.upImage.width*1.3)
-        opcC.setInteractive()
-        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
+        opcC.text.setFontSize(20).setMaxWidth(opcC.upImage.width*1.3)
+        opcC.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
             clickAnswerAudio.play();
             selectedAnswer = 'c';
             if (selectedAnswer == question.answer) {

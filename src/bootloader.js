@@ -41,6 +41,12 @@ class Bootloader extends Phaser.Scene {
             //this.game.load.image(i.toString(), 'assets/images/'+i.toString()+'.png');
         }
 
+        //Memorama
+        this.load.spritesheet('card1', './src/assets/images/card1.png', {frameWidth: (700 / 4), frameHeight:  (787 / 3), endFrame: 12});
+        this.load.spritesheet('card2', './src/assets/images/card1.png', {frameWidth: (700 / 4), frameHeight:  (787 / 3), endFrame: 12});
+        this.load.spritesheet('card3', './src/assets/images/card1.png', {frameWidth: (700 / 4), frameHeight:  (787 / 3), endFrame: 12});
+        
+        //Font
         this.load.bitmapFont('minecraft', './src/assets/fonts/minecraft.png', './src/assets/fonts/minecraft.xml');  
     
     }

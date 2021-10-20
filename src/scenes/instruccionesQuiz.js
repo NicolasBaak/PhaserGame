@@ -29,11 +29,9 @@ class InstruccionesQuiz extends Phaser.Scene {
         nombre.classList.add('input-nombre');
         document.querySelector('main').insertBefore(nombre, document.querySelector('#container'));
 
-        const buttonPreguntas = new Button( this, center_width, center_height+100);
-        buttonPreguntas.text.text = 'Iniciar';
+        const buttonPreguntas = new Button( this, center_width, center_height+100, 'Iniciar');
         this.add.existing(buttonPreguntas);
-        buttonPreguntas.setInteractive()
-        .on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
+        buttonPreguntas.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
             clickAnswerAudio.play();
             localStorage.setItem('nombreJugador', nombre.value);
             this.scene.start('Scene_preguntas');
