@@ -1,9 +1,11 @@
 {
-  "name": "rompecabezas",
+  "name": "juegos-dentales",
+  "productName": "Juegos Dentales",
   "version": "1.0.0",
-  "main": "index.js",
+  "description": "",
+  "main": "main.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "electron ."
   },
   "keywords": [],
   "author": "",
@@ -20,5 +22,8 @@
     "url": "https://github.com/NicolasBaak/PhaserGame/issues"
   },
   "homepage": "https://github.com/NicolasBaak/PhaserGame#readme",
-  "description": ""
+  "devDependencies": {
+    "electron": "^15.3.0",
+    "electron-packager": "^15.4.0"
+  }
 }

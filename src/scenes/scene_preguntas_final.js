@@ -53,11 +53,11 @@ class Scene_preguntas_final extends Phaser.Scene{
         
 
         //texto con informacion sobre los dientes
-        this.titulo = this.add.bitmapText(center_width-80, center_height-150, 'minecraft' ,'¡¡Fin del juego 🎉!!');
+        this.titulo = this.add.bitmapText(center_width-120, center_height-150, 'minecraft' ,'¡¡ Fin del juego !!');
 
 
          // texto de aciertos
-        this.miscore = this.add.bitmapText(center_width-80, center_height-100, 'minecraft' ,   'Aciertos - ' + totalHits + ' de ' + (totalHits + totalQuestion) );
+        this.miscore = this.add.bitmapText(center_width-110, center_height-100, 'minecraft' ,   'Aciertos: ' + totalHits + ' de ' + (totalHits + totalQuestion) );
 
          // texto de Porcentaje
         // this.scoreText = this.add.bitmapText(center_width-80, center_height-50,  'minecraft' , 'Porcentaje - ¡¡' + Math.floor(score) + '!!' );
@@ -65,20 +65,20 @@ class Scene_preguntas_final extends Phaser.Scene{
     // textos que se muestran de acuerdo al porcentaje obtenido
     if (Math.floor(score) <= 30) {
         M_lose.play();
-        let scoreText = this.add.bitmapText(center_width-220, center_height, 'minecraft' ,'No te preocupes por el resultado ' + username + ', recuerda que la práctica hace al maestro!! 🦾').setCenterAlign().setMaxWidth(500);
+        let scoreText = this.add.bitmapText(center_width-220, center_height-20, 'minecraft' ,'No te preocupes por el resultado ' + username + ', recuerda que la práctica hace al maestro!! 🦾').setCenterAlign().setMaxWidth(500);
     } else if (Math.floor(score) <= 66) {
         M_mid.play();
-        let scoreText = this.add.bitmapText(center_width-200, center_height, 'minecraft' ,'Lo hiciste bien ' + username + '!, pero recuerda que siempre puedes mejorar 😎').setCenterAlign().setMaxWidth(500);
+        let scoreText = this.add.bitmapText(center_width-230, center_height-20, 'minecraft' ,'Lo hiciste bien ' + username + '!, pero recuerda que siempre puedes mejorar 😎').setCenterAlign().setMaxWidth(500);
     } else if (Math.floor(score) <= 80) {
         rightAudio.play();
-        let scoreText = this.add.bitmapText(center_width-200, center_height, 'minecraft' , 'Muy bien ' + username + ' !!Tu resultado refleja que tienes buenos conocimientos 😋').setCenterAlign().setMaxWidth(500);
+        let scoreText = this.add.bitmapText(center_width-230, center_height-20, 'minecraft' , 'Muy bien ' + username + ' !!Tu resultado refleja que tienes buenos conocimientos 😋').setCenterAlign().setMaxWidth(500);
     } else {
         M_win.play();
-        let scoreText = this.add.bitmapText(center_width-200, center_height, 'minecraft' , 'Excelente ' + username+ ', muchas felicidades!!! 🥇, el esfuerzo de tu estudio se nota').setCenterAlign().setMaxWidth(500);
+        let scoreText = this.add.bitmapText(center_width-230, center_height-20, 'minecraft' , 'Excelente ' + username+ ', muchas felicidades!!! 🥇, el esfuerzo de tu estudio se nota').setCenterAlign().setMaxWidth(500);
     }
 
-    let restartButton = new Button( this, center_width-100, center_height+130, 'Nuevo Intento').setScale(0.6);
-    let MenuButton = new Button( this, center_width+100, center_height+130, 'Menu principal').setScale(0.6);
+    let restartButton = new Button( this, center_width-100, center_height+130, 'Reintentar').setScale(0.7);
+    let MenuButton = new Button( this, center_width+100, center_height+130, 'Menu').setScale(0.7);
       
     this.add.existing(restartButton);
     restartButton.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{

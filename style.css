@@ -1,24 +1,22 @@
 *{ 
-    width: 1080px;
+    padding: 0;
     margin: 0 auto;
 }
 
-html, body{
-    height: 95%;
-    background-color: rgb(112, 218, 156);
-    font-family: 'Minecraft';
-}
-
-main{
-    padding-top: 10px;
+main{    
     display: flex;
     align-items: center;
     justify-content: center;
 }
 
+::-webkit-scrollbar {
+    display: none;
+}
+
 input{
     margin-top: 30px;
 }
+
 @font-face{
     font-family: 'slkscre';
     src: url('src/assets/fonts/slkscre.ttf');
@@ -31,7 +29,6 @@ input{
     src: url('src/assets/fonts/Minecraft.ttf');
    
 }
-
 
 .input-nombre{
     position: absolute;

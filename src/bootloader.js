@@ -37,14 +37,13 @@ class Bootloader extends Phaser.Scene {
 
         //Cargar imagenes del rompecabezas 
         for(var i = 1;i < 6;i++) {
-            this.load.spritesheet("puzzle-"+i.toString(), "./src/assets/images/puzzle-"+i.toString()+".png", { frameWidth: 184, frameHeight: 184 });
-            //this.game.load.image(i.toString(), 'assets/images/'+i.toString()+'.png');
+            this.load.spritesheet("puzzle-"+i.toString(), "./src/assets/images/puzzle-"+i.toString()+".png", { frameWidth: 184, frameHeight: 184 });        
         }
 
         //Memorama
         this.load.spritesheet('card1', './src/assets/images/card1.png', {frameWidth: (700 / 4), frameHeight:  (787 / 3), endFrame: 12});
-        this.load.spritesheet('card2', './src/assets/images/card1.png', {frameWidth: (700 / 4), frameHeight:  (787 / 3), endFrame: 12});
-        this.load.spritesheet('card3', './src/assets/images/card1.png', {frameWidth: (700 / 4), frameHeight:  (787 / 3), endFrame: 12});
+        this.load.spritesheet('card2', './src/assets/images/card2.png', {frameWidth: (700 / 4), frameHeight:  (787 / 3), endFrame: 12});
+        this.load.spritesheet('card3', './src/assets/images/card3.png', {frameWidth: (700 / 4), frameHeight:  (787 / 3), endFrame: 12});
         
         //Font
         this.load.bitmapFont('minecraft', './src/assets/fonts/minecraft.png', './src/assets/fonts/minecraft.xml');  

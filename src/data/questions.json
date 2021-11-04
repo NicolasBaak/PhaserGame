@@ -1,122 +1,107 @@
   [
     {
-      "text": "01 ¿Desde cuando deben los niños empezar a visitar al dentista?",
+      "text": "¿Desde cuando deben los niños empezar a visitar al dentista?",
       "a": "Después de que salieron los dientes",
       "b": "Al salir los primeros 3 dientes",
       "c": "Cuando tengan un año de edad",
-      "img": "Image01",
       "answer": "c"
     },
     {
-      "text": "02 ¿Cuántos dientes tiene un niño?",
+      "text": "¿Cuántos dientes tiene un niño?",
       "a": "12",
       "b": "20",
       "c": "22",
-      "img": "Image02",
       "answer": "b"
     },
     {
-      "text": "03 ¿Cuántos dientes permanentes tendrá un niño cuando sea adulto?",
+      "text": "¿Cuántos dientes permanentes tendrá un niño cuando sea adulto?",
       "a": "28",
       "b": "30",
       "c": "32",
-      "img": "Image03",
       "answer": "c"
     },
     {
-      "text": "04 ¿Cuáles son las caries dentales?",
+      "text": "¿Qué son las caries dentales?",
       "a": "Una infección viral de la boca",
       "b": "Una enfermedad infecciosa",
       "c": "Son agujeros que ocurren naturalmente",
-      "img": "Image04",
       "answer": "b"
     },
     {
-      "text": "05 ¿Qué es la gingivitis?",
+      "text": "¿Qué es la gingivitis?",
       "a": "Inflamación de las encías",
       "b": "La inflamación de la lengua",
       "c": "La impactación de un diente",
-      "img": "Image05",
       "answer": "a"
     },
     {
-      "text": "06 ¿Qué es un sellador dental?",
+      "text": "¿Qué es un sellador dental?",
       "a": "Empaste dental para tratar las caries",
       "b": "Pasta de dientes prescripción especial",
       "c": "Una cubierta protectora para molares",
-      "img": "Image06",
       "answer": "c"
     },
     {
-      "text": "07 ¿Cuál es otro nombre para los terceros molares?",
+      "text": "¿Cuál es otro nombre para los terceros molares?",
       "a": "La tercera erupción",
       "b": "Los dientes supernumerarios",
       "c": "Las muelas del juicio",
-      "img": "Image07",
       "answer": "c"
     },
     {
-      "text": "08 ¿Con qué frecuencia te cepillas los dientes?",
+      "text": "¿Con qué frecuencia te cepillas los dientes?",
       "a": "Menos de una vez al día",
       "b": "Tres veces al día",
       "c": "Una o dos veces al día",
-      "img": "Image08",
       "answer": "b"
     },
     {
-      "text": "09 ¿Cúanto tiempo crees que deba durar cepillar tus dientes?",
+      "text": "¿Cúanto tiempo crees que deba durar cepillar tus dientes?",
       "a": "Entre 2 y 3 minutos",
       "b": "Entre 1 y 2 minutos",
       "c": "Menos de un minuto",
-      "img": "Image09",
       "answer": "a"
     },
     {
-      "text": "10 ¿Cómo se deben cepillar los dientes?",
+      "text": "¿Cómo se deben cepillar los dientes?",
       "a": "Con mucha fuerza",
       "b": "Con movimientos horizontales",
-      "c": "Con movimientos verticales o circulares, de arriba abajo",
-      "img": "Image10",
+      "c": "Con movimientos circulares, de arriba abajo",
       "answer": "c"
     },
     {
-      "text": "11 ¿Cada cuánto tiempo se debe cambiar el cepillo de dientes?",
+      "text": "¿Cada cuánto tiempo se debe cambiar el cepillo de dientes?",
       "a": "Cada 6 meses",
       "b": "Cada 3 meses",
       "c": "Cada mes",
-      "img": "Image11",
       "answer": "b"
     },
     {
-      "text": "12 ¿Es recomendable usar enjuague bucal?",
+      "text": "¿Es recomendable usar enjuague bucal?",
       "a": "Si se puede sí, es recomendable",
       "b": "No, no ayuda mucho",
       "c": "De vez en cuando",
-      "img": "Image12",
       "answer": "a"
     },
     {
-      "text": "13 ¿Es recomendable usar hilo dental?",
+      "text": "¿Es recomendable usar hilo dental?",
       "a": "De vez en cuando",
       "b": "No, no ayuda mucho",
       "c": "Si se puede sí, es recomendable",
-      "img": "Image13",
       "answer": "c"
     },
     {
-      "text": "14 ¿Cada cuánto tiempo se debe ir al dentista?",
+      "text": "¿Cada cuánto tiempo se debe ir al dentista?",
       "a": "Sólo cuando me duele algo",
       "b": "Una o más veces al año",
       "c": "Una vez cada dos años",
-      "img": "Image14",
       "answer": "b"
     },
     {
-      "text": "15 ¿Cuánta pasta de dientes se debe poner en el cepillo?",
+      "text": "¿Cuánta pasta de dientes se debe poner en el cepillo?",
       "a": "Que ocupe todo el cepillo de dientes",
       "b": "Que sea del tamaño de un chícharo",
       "c": "Se debe poner 1 gramo nada más",
-      "img": "Image15",
       "answer": "b"
     }
   ]

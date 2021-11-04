@@ -32,15 +32,16 @@ class Scene_preguntas extends Phaser.Scene {
         let question = this.getQuestion(gameState.currentQuestion);
         //console.log(gameState.currentQuestion);
         //console.log("pregunta:", question);
+        
         // opción selecionada: undefined 'a', 'b' ó 'c'
         let selectedAnswer = gameState.recordedAnswer[gameState.currentQuestion];
-   
-        //Variables
+        
+        // Musica
         this.game.sound.stopAll();
         this.sound.add('M_quiz', {loop:true, volume: 0.3}).play();
-   
         let clickAnswerAudio = this.sound.add('click-answer', {loop:false}); 
         let click = this.sound.add('click', {loop:false}); 
+        
         let center_width = this.sys.game.config.width/2;
         let center_height = this.sys.game.config.height/2;
     
@@ -59,7 +60,7 @@ class Scene_preguntas extends Phaser.Scene {
         this.add.existing(buttonMenu);
         buttonMenu.on(Phaser.Input.Events.GAMEOBJECT_POINTER_DOWN, ()=>{
             clearTimeout(nextQuestionSetTimeOut);
-            click.play();
+            //click.play();
             this.scene.start('Menu');
         })
         
@@ -69,11 +70,11 @@ class Scene_preguntas extends Phaser.Scene {
             clickAnswerAudio.play();
             selectedAnswer = 'a';
             if (selectedAnswer == question.answer) {
-                this.pregunta.setText('Correcto! 😄');
+                this.pregunta.setText('La respuesta fue: \n\n  ¡ Correcta !');
                 this.savedOption += 1;
             }
             else {
-                this.pregunta.setText('La respuesta fue incorrecta 🤔');
+                this.pregunta.setText('La respuesta fue: \n\n  ¡ Incorrecta !');
             }
             // ir a la proxima this.pregunta, con 2 segundos de espera
             nextQuestionSetTimeOut = setTimeout(() => {
@@ -104,11 +105,11 @@ class Scene_preguntas extends Phaser.Scene {
             clickAnswerAudio.play();
             selectedAnswer = 'b';
             if (selectedAnswer == question.answer) {
-                this.pregunta.setText('Correcto! 😄');
+                this.pregunta.setText('La respuesta fue: \n\n  ¡ Correcta !');
                 this.savedOption += 1;
             }
             else {
-                this.pregunta.setText('La respuesta fue incorrecta 🤔');
+                this.pregunta.setText('La respuesta fue: \n\n  ¡ Incorrecta !');
             }
             // ir a la proxima this.pregunta, con 2 segundos de espera
             nextQuestionSetTimeOut = setTimeout(() => {
@@ -140,11 +141,11 @@ class Scene_preguntas extends Phaser.Scene {
             clickAnswerAudio.play();
             selectedAnswer = 'c';
             if (selectedAnswer == question.answer) {
-                this.pregunta.setText('Correcto! 😄');
+                this.pregunta.setText('La respuesta fue: \n\n  ¡ Correcta !');
                 this.savedOption += 1;
             }
             else {
-                this.pregunta.setText('La respuesta fue incorrecta 🤔');
+                this.pregunta.setText('La respuesta fue: \n\n  ¡ Incorrecta ! ');
             }
             // ir a la proxima pregunta, con 2 segundos de espera
             nextQuestionSetTimeOut = setTimeout(() => {
@@ -170,15 +171,14 @@ class Scene_preguntas extends Phaser.Scene {
 
     getQuestion = function (questionID) {
         let questions = this.cache.json.get('questions');
-        // Desordena el arreglo de preguntas para que no salgan en el mismo orden
-        while (questions[0].text == '01 Primera Pregunta' && questions[1].text == '02 Segunda Pregunta' && questions[2].text == '03 Tercera Pregunta') {
-            // console.log(questions);
-            questions = questions.sort(function () {
-                return Math.random() - 0.5;
-            });
-            //console.log("new: ", questions);
-        }
-    
+
+        // Desordena el arreglo de preguntas
+        let NewQuestions = questions.sort(function () {
+            return Math.random() - 0.5;
+        });
+        
+        questions = [...NewQuestions];
+       
         return questions[questionID]; // puede ser undefined
     }
     
