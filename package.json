@@ -1,16 +1,19 @@
 {
   "name": "juegos-dentales",
-  "productName": "Juegos Dentales",
+  "productName": "juegos-dentales",
   "version": "1.0.0",
-  "description": "",
+  "description": "Esta aplicación es un conjunto de minijuegos relacionados con la salud bucal:  -Puzzle/rompecabezas -Preguntas y Respuestas -Memorama",
   "main": "main.js",
   "scripts": {
-    "start": "electron ."
+    "start": "electron .",
+    "package-linux": "electron-packager .  juegos-dentales --overwrite --platform=linux --arch=x64 --icon=src/assets/images/logo.png --prune=true --out=release-builds",
+    "create-debian-installer": "electron-installer-debian --src release-builds/juegos-dentales-linux-x64/ --arch amd64 --config debian.json"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "electron-installer-debian": "^3.1.0",
     "phaser": "^3.55.2",
     "phaser3-rex-plugins": "^1.1.52"
   },
